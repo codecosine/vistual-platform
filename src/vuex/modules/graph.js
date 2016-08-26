@@ -3,6 +3,7 @@
  */
 import {
   INIT_OPTION,
+  UPDATE_OPTION,
 } from '../mutation-types';
 
 const graphState = {
@@ -12,6 +13,10 @@ const graphState = {
 
 const mutations = {
   [INIT_OPTION](state, option) {
+    const innerState = state;
+    innerState.option = option;
+  },
+  [UPDATE_OPTION](state, option) {
     const innerState = state;
     innerState.option = option;
   },

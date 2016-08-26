@@ -8,3 +8,6 @@ export const initGraph = ({ dispatch }, type) => {
   const option = graphOption.defaultType(type);
   dispatch(types.INIT_OPTION, option);
 };
+export const updateGraph = ({ dispatch }, option) => {
+  dispatch(types.UPDATE_OPTION, option);
+};

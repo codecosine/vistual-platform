@@ -1,7 +1,7 @@
 /**
  * Created by codecosine on 16-8-16.
  */
-const cosine = (function () {
+const cosine = function cosine() {
   const data = [];
   for (let i = 0; i <= 360; i++) {
     const t = i / 180 * Math.PI;
@@ -9,7 +9,7 @@ const cosine = (function () {
     data.push([r, i]);
   }
   return data;
-});
+};
 const graphOptions = {
   polar: {
     title: {
