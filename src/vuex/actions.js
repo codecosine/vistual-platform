@@ -11,3 +11,7 @@ export const initGraph = ({ dispatch }, type) => {
 export const updateGraph = ({ dispatch }, option) => {
   dispatch(types.UPDATE_OPTION, option);
 };
+export const updateType = ({ dispatch }, type) => {
+  dispatch(types.UPDATE_TYPE, type);
+};
+

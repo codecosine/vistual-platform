@@ -3,6 +3,7 @@
  */
 export const INIT_OPTION = 'INIT_OPTION';
 export const UPDATE_OPTION = 'UPDATE_OPTION';
+export const UPDATE_TYPE = 'UPDATE_TYPE';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const USERINFO_SUCCESS = 'USERINFO_SUCCESS';

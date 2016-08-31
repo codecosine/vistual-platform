@@ -4,7 +4,6 @@ import Welcome from './components/Welcome';
 import Hello from './components/DashBoard';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
-import ECharts from 'vue-echarts/src/components/ECharts.vue';
 import 'bootstrap/less/bootstrap.less';
 
 // 路由模块和HTTP模块
@@ -12,8 +11,6 @@ Vue.use(VueResource);
 
 Vue.use(VueRouter);
 const router = new VueRouter();
-
-Vue.component('chart', ECharts);
 
 router.map({
   '/index': {
@@ -27,4 +24,4 @@ router.map({
 router.redirect({
   '*': '/index',
 });
-router.start(App, '#app');
+router.start(App, 'app');
