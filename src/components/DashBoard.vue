@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="app-header">
       <ul class="tools">
         <li><a @click="showLeft = true"><i class="glyphicon glyphicon-menu-hamburger"></i></a></li>
         <li><a @click="showChartsList = true"><i class="glyphicon glyphicon-th"></i></a></li>
@@ -67,10 +67,17 @@
   </aside>
 </template>
 <style scoped>
-  .header {
+
+  .app-header {
     height: 5rem;
     display: flex;
     flex-direction: column;
+    z-index: 3;
+    margin-bottom: -1px;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-bottom: 1px solid rgba(0,0,0,0.075);
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
   }
   .nav{
     overflow: visible;

@@ -1,21 +1,64 @@
 <template>
-    <div class="banner masthead">
-      <div class="banner_con">
-        <div class="banner_txt">
-          <h1>可视化教学平台</h1>
-          <h2>您身边的数据专家，让数据会说话</h2>
-          <p class="masthead-button-links">
-            <a class="btn btn-lg btn-primary btn-shadow" target="_blank" role="button" v-link="{ path:'/app' }">马上使用</a>
-          </p>
+  <header class="site-header">
+    <div class="container">
+      <div class="navbar-header">
+        <img src='../assets/img/logo_simple.png' style="float:left;width:40px">
+        <a class="navbar-brand" href="#">可视化教学平台</a>
+      </div>
+      <nav class="navbar-main">
+        <ul class="nav navbar-nav">
+          <li><a href="#">特性</a></li>
+          <li><a href="#">文档</a></li>
+          <li><a href="#">帮助</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">登录</a></li>
+          <li><a href="#">注册</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="site-main">
+    <div class="banner banner-inverse">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <h1>看见更多</h1>
+            <h3>数据的声音，离你只有一个按钮的距离</h3>
+          </div>
+          <div class="col-sm-6">
+            <form class="form-horizontal" role="form">
+              <div class="form-group">
+                <div class="col-sm-8">
+                  <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-8">
+                  <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> Remember me
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Sign in</button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
+
     <div class="container">
-      <div class="bs-docs-featurette">
-        <h2 class="bs-docs-featurette-title">为更大数据,更多应用场景而生。</h2>
-        <p class="lead">让数据可视化更快速、简单。所有人都能快速上手。</p>
-      </div>
-      <hr class="half-rule">
       <div class="row">
         <div class="col-sm-4">
           <img src="../assets/img/introduce/echart3.png" alt="Echart3" class="img-responsive">
@@ -35,8 +78,6 @@
           <p>可视化教学平台 提供了多种数据源支持，包括主流的Excel文件,Mysql数据库</p>
         </div>
       </div>
-
-
       <div class="row">
         <div class="col-xs-12">
           <h3 class="front_title text-center">更丰富的图表类型</h3>
@@ -67,16 +108,14 @@
         </div>
         <div class="col-sm-3 col-xs-12">
           <div class="step_item">
-
             <p class="step_img">
               <img src="../assets/img/gallery/treemap-disk.png">
             </p>
           </div>
         </div>
       </div>
-
     </div>
-
+  </div>
   <footer class="footer">
     <div class="container">
       <p>Code licensed under <a href="https://github.com/angular-ui/bootstrap/blob/master/LICENSE">MIT License</a>.</p>
@@ -86,6 +125,51 @@
 
 </template>
 <style scoped>
+  .site-header{
+    position: relative;
+    z-index: 3;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-bottom: 1px solid rgba(0,0,0,0.075);
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+  .navbar-main {
+    margin-bottom: 0;
+    margin-left: 5px;
+  }
+  .navbar-header a{
+    line-height: 20px;
+    color: #3c4146;
+  }
+  .navbar-main ul li a{
+    line-height: 20px;
+    color: #3c4146;
+  }
+  .banner{
+    background-image: url(../assets/img/pexels-photo.jpg);
+    background-size: cover;
+    text-align: center;
+    height: 550px;
+  }
+  .banner-inverse{
+    color: #fff;
+    background-color: #333;
+  }
+  .banner::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    content: "";
+    background-color: rgba(0,0,0,0.3);
+    -webkit-transition: background-color 0.2s ease-out;
+    transition: background-color 0.2s ease-out;
+  }
   .footer{
     padding-top: 40px;
     padding-bottom: 40px;
@@ -93,67 +177,6 @@
     color: #767676;
     text-align: center;
   }
-  .banner_work{
-    background-image: url(../assets/img/bs-masthead5.png);
-    background-size: cover;
-    text-align: center;
-    height: 400px;
-
-  }
-  .banner_work_txt{
-    color:#000000;
-    vertical-align:middle;
-    display: table-cell;
-  }
-  .banner_work_txt .masthead-button-links{
-    margin-top:60px;
-  }
-  .banner{
-    margin-top: -78px;
-    background-image: url(../assets/img/bs-masthead.png);
-    background-size: cover;
-    text-align: center;
-    height: 600px;
-
-  }
-  .banner_con {
-    display: table;
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  .banner_txt{
-    color:#ffffff;
-    vertical-align:middle;
-    display: table-cell;
-  }
-  .banner_txt h1{
-    font-size:70px;
-  }
-  .banner_txt h2{
-    font-weight: 200;
-    line-height: 1.25;
-    font-size:35px;
-  }
-  .banner_txt .masthead-button-links{
-    margin-top:30px;
-  }
-  .bs-docs-featurette{
-    text-align: center;
-    line-height: 1.5;
-    color: #555;
-  }
-  .bs-docs-featurette .lead{
-    max-width: 80%;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  .half-rule{
-    width: 100px;
-    margin: 40px auto;
-  }
-
 
   .logo{
     display: block;
@@ -183,6 +206,5 @@
 </style>
 <script>
   export default {
-
   };
 </script>
