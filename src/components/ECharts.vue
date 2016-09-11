@@ -100,6 +100,7 @@ export default {
     },
   },
   ready() {
+    console.log(this.$el);
     const chart = echarts.init(this.$el, this.theme, this.initOptions);
     // use assign statements to tigger "options" and "group" setters
     chart.setOption(this.options);
@@ -111,7 +112,6 @@ export default {
     this.$watch('group', (group) => {
       chart.group = group;
     });
-
     // expose ECharts events as custom events
     ACTION_EVENTS.forEach(event => {
       chart.on(event, params => {
