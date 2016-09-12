@@ -23,10 +23,37 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <h1>看见更多</h1>
-            <h3>数据的声音，离你只有一个按钮的距离</h3>
+            <div class="center-block banner-text">
+              <h1>用心,听见更多</h1>
+              <h3>不再是满屏幕冰冷的数字</h3>
+              <h3>数据的声音,离你只有一个按钮的距离</h3>
+              <h3>可视化教学平台,所有人都可以快速上手</h3>
+            </div>
           </div>
           <div class="col-sm-6">
+            <form role="form" class="center-block auth-modal auth-modal-inner">
+              <div class="center-block">
+                <p class="text-danger">
+                  <span class="glyphicon glyphicon-info-sign"></span>
+                  登录失败!用户名或者密码错误,请重试.
+                </p>
+
+              </div>
+              <div class="form-group">
+                <label for="username">用户名/邮箱</label>
+                <input type="email" class="form-control" id="username">
+              </div>
+              <div class="form-group">
+                <label for="inputpassword">密码</label>
+                <input type="password" class="form-control" id="inputpassword">
+              </div>
+              <button type="button" @click="signIn" class="btn btn-block btn-danger">登录</button>
+              <p class="create-account-callout center-block">
+                没有账号?
+                <a>注册新用户</a>
+              </p>
+            </form>
+
           </div>
         </div>
       </div>
@@ -110,6 +137,7 @@
     border-bottom: 1px solid rgba(0,0,0,0.075);
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
   }
+
   .navbar-main {
     margin-bottom: 0;
     margin-left: 5px;
@@ -125,12 +153,12 @@
   .banner{
     background-image: url(../assets/img/pexels-photo.jpg);
     background-size: cover;
-    text-align: center;
     height: 550px;
+    margin-bottom: 50px;
+    padding: 100px 0px;
   }
-  .banner-inverse{
+  .banner-text{
     color: #fff;
-    background-color: #333;
   }
   .banner::before {
     position: absolute;
@@ -152,33 +180,13 @@
     text-align: center;
   }
 
-  .logo{
-    display: block;
-    width: 274px;
-    height: 100px;
-    background: url(../assets/img/logo.png) no-repeat;
-    margin: 0 auto 10px;
-  }
-  .login{
-    padding:0 27px;
-  }
-  .login .btn{
-    width: 100%;
-  }
-
-  .step_img img{
-    height: 100%;
-    width: 100%;
-  }
-
-  .chartBox{
-    height: 400px;
-  }
-  .list_margin{
-    margin-bottom: 10px;
-  }
 </style>
 <script>
   export default {
+    methods: {
+      signIn() {
+        this.$route.router.go({ name: 'application', params: { userId: 123 } });
+      },
+    },
   };
 </script>

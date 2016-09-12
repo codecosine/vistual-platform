@@ -2,6 +2,12 @@
   <div class="container">
     <div class="row">
         <div class="center-block logo"><img src="../assets/img/logo.png" style="width:150px"></div>
+
+      <alert :show.sync="signinError" class="center-block" duration="0" type="danger" width="350px" dismissable>
+        <span class="glyphicon glyphicon-info-sign"></span>
+        <strong>登录失败</strong>
+        <p>用户名或者密码错误,请重试</p>
+      </alert>
         <form role="form" class="center-block auth-modal auth-modal-inner">
           <div class="form-group">
             <label for="username">用户名/邮箱</label>
@@ -15,7 +21,7 @@
         </form>
         <p class="create-account-callout center-block auth-modal">
           没有账号?
-          <a href="/join?source=login" data-ga-click="Sign in, switch to sign up">注册新用户</a>.
+          <a href="/join?source=login" data-ga-click="Sign in, switch to sign up">注册新用户</a>
         </p>
     </div>
   </div>
@@ -38,6 +44,7 @@
     height:150px;
   }
   .create-account-callout {
+    margin-top: 15px;
     padding: 15px 20px;
     text-align: center;
     border: 1px solid #d8dee2;
@@ -45,7 +52,15 @@
   }
 </style>
 <script>
+    import { alert } from 'vue-strap';
     export default{
-
+      components: {
+        alert,
+      },
+      data() {
+        return {
+          signinError: true,
+        };
+      },
     };
 </script>

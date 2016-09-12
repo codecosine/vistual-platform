@@ -8,14 +8,25 @@
         <li><a><i class="glyphicon glyphicon-refresh"></i></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">用户名</a></li>
+        <li><a><i class="glyphicon glyphicon-user"></i>用户名</a></li>
       </ul>
     </nav>
   </div>
   <div class="app-main">
     <div class="container">
+      <v-select>
+        <v-option value="apple">Apple</v-option>
+        <v-option value="banana">Banana</v-option>
+        <v-option value="cherry">Cherry</v-option>
+        <v-option value="orange">Orange</v-option>
+        <v-option value="grape">Grape</v-option>
+      </v-select>
+      <form action="./#select" method="get">
+        <v-select :value.sync="select.value" :options="select.test" multiple name="animals[]" limit="3" search justified required disabled clear-button close-on-select></v-select>
+        <button type="submit" class="btn btn-default">Submit form</button>
+      </form>
       <div v-for="graph in currentApp.graphList">
-        <echarts :options="graphOptions[graph.group]" :group="graph.group"></echarts>
+        <v-echarts :options="graphOptions[graph.group]" :group="graph.group"></v-echarts>
       </div>
     </div>
   </div>
@@ -65,18 +76,31 @@
 </style>
 <script>
   import echarts from './ECharts.vue';
-  import { aside, input } from 'vue-strap';
+  import { select, option, aside, input } from 'vue-strap';
   import { initGraph, updateType } from '../vuex/actions';
   import { graphOptions, appList, currentApp } from '../vuex/getters';
   export default {
     components: {
       aside,
-      echarts,
+      VEcharts: echarts,
+      VSelect: select,
+      VOption: option,
       BsInput: input,
     },
     data() {
       return {
         showArg: false,
+        value: '',
+        test: [
+          { value: 1, label: 'Cat' },
+          { value: 2, label: 'Cow' },
+          { value: 3, label: 'Dog' },
+          { value: 4, label: 'Elephant' },
+          { value: 5, label: 'Fish' },
+          { value: 6, label: 'Lion' },
+          { value: 7, label: 'Tiger' },
+          { value: 8, label: 'Turtle' },
+        ],
       };
     },
     vuex: {
