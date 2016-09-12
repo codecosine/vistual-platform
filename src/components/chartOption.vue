@@ -1,36 +1,38 @@
 <template>
-  <div class="container">
     <form class="form-horizontal">
       <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-        <div class="col-sm-10">
-          <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+        <div class="form-group">
+          <label for="Bar" class="col-sm-3 control-label">Bar</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" v-model="bar.name" id="Bar">
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+        <div class="form-group">
+          <label for="Bar2" class="col-sm-3 control-label">Bar2</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" v-model="bar.texta" id="Bar2">
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-default" @click="updateGraph(msg)">updateGraph</button>
+
+        <div class="col-sm-offset-3 col-sm-9">
+          <button type="button" class="btn btn-success" @click="update">updateGraph</button>
         </div>
       </div>
     </form>
-  </div>
 </template>
 
 <style>
 
 </style>
-
 <script>
     import { updateGraph } from '../vuex/actions';
     export default{
       data() {
         return {
+          chartArg: {
+            bar: {},
+            pie: {},
+          },
           msg: {
             title: {
               text: '折线图堆叠',
@@ -74,6 +76,10 @@
       vuex: {
         actions: {
           updateGraph,
+        },
+      },
+      method: {
+        update() {
         },
       },
     };

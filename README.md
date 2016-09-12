@@ -1,6 +1,8 @@
 # vistual-platform
 
-> A Vue.js project
+> 数字校园项目@0.0.2
+
+功能暂不完善。
 
 ## Build Setup
 
@@ -24,4 +26,4 @@ npm run e2e
 npm test
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+

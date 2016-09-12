@@ -3,7 +3,10 @@
  */
 import Vue from 'vue';
 import Vuex from 'vuex';
-import graph from './modules/graph';
+import activeGraph from './modules/activeGraph';
+import auth from './modules/auth';
+import application from './modules/application';
+import storage from './modules/storage';
 
 Vue.use(Vuex);
 Vue.config.debug = true;
@@ -12,7 +15,10 @@ const debug = process.env.NODE_ENV !== 'production';
 
 export default new Vuex.Store({
   modules: {
-    graph,
+    application,
+    activeGraph,
+    auth,
+    storage,
   },
   strict: debug,
 });

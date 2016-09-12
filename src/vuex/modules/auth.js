@@ -2,41 +2,35 @@
  * Created by codecosine on 16-8-17.
  */
 import {
-  LOGIN_SUCCESS,
-  USERINFO_SUCCESS,
-  USERINFO_FAILURE,
-  LOGOUT_USER,
-  UPDATE_USER_SUCCESS,
+  AUTH_SUCCESS,
+  SIGNIN_SUCCESS,
+  LOGOUT_SUCCESS,
 } from '../mutation-types';
-import { getCookie } from '../../api/authService';
 
 const authState = {
-  token: getCookie('token') || null,
-  user: null,
+  token: null,
+  user: {
+    username: '未登录',
+    authId: '',
+  },
 };
 
 const mutations = {
-  [LOGIN_SUCCESS](state, action) {
+  [AUTH_SUCCESS](state, token) {
     const innerState = state;
-    innerState.token = action.token;
+    innerState.token = token;
   },
-  [USERINFO_SUCCESS](state, action) {
+  [SIGNIN_SUCCESS](state, data) {
     const innerState = state;
-    innerState.user = action.user;
+    innerState.user = data.user;
   },
-  [USERINFO_FAILURE](state) {
+  [LOGOUT_SUCCESS](state) {
     const innerState = state;
-    innerState.user = null;
-  },
-  [LOGOUT_USER](state) {
-    const innerState = state;
-    innerState.token = getCookie('token') || null;
-    innerState.user = null;
     innerState.token = null;
-  },
-  [UPDATE_USER_SUCCESS](state, action) {
-    const innerState = state;
-    innerState.user = action.user;
+    innerState.user = {
+      username: '未登录',
+      authId: '',
+    };
   },
 };
 

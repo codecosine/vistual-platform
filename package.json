@@ -10,14 +10,16 @@
     "unit": "karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
+    "server": "node server/dev-server.js"
   },
   "dependencies": {
     "babel-runtime": "^6.0.0",
     "bootstrap": "^3.3.7",
-    "echarts": "^3.2.2",
+    "echarts": "^3.2.3",
+    "leancloud-storage": "^1.4.0",
+    "radon-ui": "^0.2.0",
     "vue": "^1.0.21",
-    "vue-echarts": "^0.1.1",
     "vue-resource": "^0.9.3",
     "vue-router": "^0.7.13",
     "vue-strap": "^1.0.11",
