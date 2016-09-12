@@ -15,3 +15,8 @@ export const updateType = ({ dispatch }, type) => {
   dispatch(types.UPDATE_TYPE, type);
 };
 
+
+// Application
+export const selectApp = ({ dispatch }, id) => {
+  dispatch(types.UPDATE_CURRENTAPP, id);
+};

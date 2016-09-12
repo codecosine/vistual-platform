@@ -5,6 +5,7 @@ import VueResource from 'vue-resource';
 import App from './App';
 import Welcome from './components/Welcome.vue';
 import DashBoard from './components/DashBoard.vue';
+import Application from './components/Application.vue';
 import SignIn from './components/SignIn.vue';
 
 import 'bootstrap/less/bootstrap.less';
@@ -17,6 +18,10 @@ router.map({
   },
   '/app': {
     component: DashBoard,
+  },
+  '/app/user/:userId': {
+    name: 'application',
+    component: Application,
   },
   '/session': {
     component: SignIn,

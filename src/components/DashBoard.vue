@@ -3,10 +3,7 @@
     <nav>
       <ul class="nav navbar-nav">
         <li><a><i class="glyphicon glyphicon-th"></i>应用</a></li>
-        <li><a><i class="glyphicon glyphicon-menu-hamburger"></i></a></li>
-        <li><a @click="showArg = true"><i class="glyphicon glyphicon glyphicon-pencil"></i></a></li>
-        <li><a><i class="glyphicon glyphicon-cog"></i></a></li>
-        <li><a><i class="glyphicon glyphicon-refresh"></i></a></li>
+        <li><a><i class="glyphicon glyphicon-question-sign"></i>帮助</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">用户名</a></li>
@@ -15,22 +12,92 @@
   </div>
   <div class="app-main">
     <div class="container">
-      <div class="container cardList">
-        <div v-for="card in appList">
-          <rd-card :title='card.appName' class="col-sm-4">
-            <p>{{card.graphId}}</p>
-          </rd-card>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" v-for="app in appList">
+          <div class="app-item clearfix text-center">
+            <div class="app-item-meta clearfix">
+              <a @click="gotoApp" class="btn btn-link app-item-name selectable-text app-set ng-binding" title="cosiner">{{app.appName}}</a>
+            </div>
+            <div class="app-item-stats">
+              <div class="figure-wrap">
+                <span class="figure bstooltip ng-scope ng-binding" data-title="2" data-container="body" ng-attr-bs-tooltip="{{ app.total_user_count > 1000 ? '' : 'false' }}" bs-tooltip="false">2</span>
+                <div class="text-label cursor-help">图表</div>
+              </div>
+              <div class="figure-wrap">
+                <span class="figure bstooltip ng-scope ng-binding" data-title="5" data-container="body" ng-attr-bs-tooltip="{{ app.yesterday_reqs > 1000 ? '' : 'false' }}" bs-tooltip="false">0</span>
+                <div class="text-label cursor-help">数据系列</div>
+              </div>
+              <div class="figure-wrap">
+                <span class="figure bstooltip ng-scope ng-binding" data-title="0" data-container="body" ng-attr-bs-tooltip="{{ app.yesterday_reqs > 1000 ? '' : 'false' }}" bs-tooltip="false">0</span>
+                <div class="text-label cursor-help">分析</div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div v-for="graph in currentApp.graphList">
-        <echarts :options="graphOptions[graph.group]" :group="graph.group"></echarts>
+
+    </div>
+    <div class="container">
+      <div>
+        <h2 id="overview" class="page-header">创建一个新的应用</h2>
       </div>
     </div>
+
   </div>
-  <aside :show.sync="showArg" placement="left" header="配置图表参数" :width="350">
-  </aside>
 </template>
 <style scoped>
+  .app-item {
+    position: relative;
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: color .2s ease,border .2s ease;
+  }
+  .app-item .app-item-stats {
+    padding: 0 15px 12px;
+  }
+  .app-item-name {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    line-height: 32px;
+    font-weight: 700;
+    max-width: 80%;
+    max-width: calc(100% - 100px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 0;
+  }
+  .app-item .app-item-stats .figure-wrap {
+    width: 33.33%;
+    width: calc(100% / 3);
+    float: left;
+  }
+  .app-item .app-item-meta .app-item-settings {
+    position: absolute;
+    color: #e5e5e5;
+    text-decoration: none;
+    line-height: 32px;
+    top: 15px;
+    right: 13px;
+    transition: color .2s ease;
+  }
+  .app-item .app-item-stats .figure {
+    font-family: radikal,"Helvetica Neue",Helvetica,"PingFang SC","Microsoft Yahei","WenQuanYi Micro Hei",Arial,Verdana,sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.1;
+    color: #555;
+    transition: color .2s ease;
+  }
+  .app-item .app-item-stats .text-label {
+    color: #999;
+    font-size: 12px;
+    font-weight: 300;
+  }
+  .cursor-help {
+    cursor: help;
+    vertical-align: 1px;
+  }
   .app-header {
     height: 5rem;
     display: flex;
@@ -48,16 +115,9 @@
 
 </style>
 <script>
-  import echarts from './ECharts.vue';
-  import { aside, input } from 'vue-strap';
-  import { initGraph, updateType } from '../vuex/actions';
-  import { graphOptions, appList, currentApp } from '../vuex/getters';
+  import { selectApp, updateType } from '../vuex/actions';
+  import { appList } from '../vuex/getters';
   export default {
-    components: {
-      aside,
-      echarts,
-      BsInput: input,
-    },
     data() {
       return {
         showArg: false,
@@ -65,13 +125,16 @@
     },
     vuex: {
       getters: {
-        graphOptions,
         appList,
-        currentApp,
       },
       actions: {
-        initGraph,
+        selectApp,
         updateType,
+      },
+    },
+    method: {
+      gotoApp() {
+        // this.$router.go({ name: 'user', params: { userId: 123 } });
       },
     },
   };
