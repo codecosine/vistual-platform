@@ -2,13 +2,11 @@
   <div class="app-header">
     <nav>
       <ul class="nav navbar-nav">
-        <li><a href="#">应用</a></li>
-        <li><a @click="showLeft = true"><i class="glyphicon glyphicon-menu-hamburger"></i></a></li>
-        <li><a @click="showChartsList = true"><i class="glyphicon glyphicon-th"></i></a></li>
+        <li><a><i class="glyphicon glyphicon-th"></i>应用</a></li>
+        <li><a><i class="glyphicon glyphicon-menu-hamburger"></i></a></li>
         <li><a @click="showArg = true"><i class="glyphicon glyphicon glyphicon-pencil"></i></a></li>
-        <li><a @click="changeOrigin"><i class="glyphicon glyphicon-wrench"></i></a></li>
-        <li><a @click='changeGraph'><i class="glyphicon glyphicon-cog"></i></a></li>
-        <li><a @click="test('polar')"><i class="glyphicon glyphicon-refresh"></i></a></li>
+        <li><a><i class="glyphicon glyphicon-cog"></i></a></li>
+        <li><a><i class="glyphicon glyphicon-refresh"></i></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">用户名</a></li>
@@ -18,19 +16,17 @@
   <div class="app-main">
     <div class="container">
       <div class="container cardList">
-        <div v-for="card in cardList">
-          <rd-card :title='card.name' class="col-sm-4">
-            <p>{{card.content}}</p>
+        <div v-for="card in appList">
+          <rd-card :title='card.appName' class="col-sm-4">
+            <p>{{card.graphId}}</p>
           </rd-card>
         </div>
       </div>
-      <div v-for="graph in graphList">
+      <div v-for="graph in currentApp.graphList">
         <echarts :options="graphOptions[graph.group]" :group="graph.group"></echarts>
       </div>
     </div>
   </div>
-
-
   <aside :show.sync="showArg" placement="left" header="配置图表参数" :width="350">
   </aside>
 </template>
@@ -53,60 +49,30 @@
 </style>
 <script>
   import echarts from './ECharts.vue';
-  import { rdCard } from 'radon-ui';
   import { aside, input } from 'vue-strap';
   import { initGraph, updateType } from '../vuex/actions';
-  import { graphOptions } from '../vuex/getters';
+  import { graphOptions, appList, currentApp } from '../vuex/getters';
   export default {
     components: {
-      rdCard,
       aside,
       echarts,
       BsInput: input,
     },
     data() {
       return {
-        showChartsList: false,
-        showLeft: false,
-        showOrigin: 0,
-        showTop: false,
         showArg: false,
-        selectedChart: 0,
-        cardList: [
-          {
-            name: 'chart1',
-            content: 'content1',
-          },
-          {
-            name: 'chart2',
-            content: 'content2',
-          },
-          {
-            name: 'chart3',
-            content: 'content3',
-          },
-        ],
-        graphList: [
-          {
-            group: 'group2',
-            name: 'testName1',
-          }, {
-            group: 'group2',
-            name: 'testName2',
-          },
-        ],
       };
     },
     vuex: {
       getters: {
         graphOptions,
+        appList,
+        currentApp,
       },
       actions: {
         initGraph,
         updateType,
       },
-    },
-    computed: {
     },
   };
 </script>

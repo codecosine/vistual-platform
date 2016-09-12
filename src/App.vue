@@ -1,6 +1,5 @@
 <template>
     <router-view></router-view>
-    <rd-notification></rd-notification>
 </template>
 
 <script>

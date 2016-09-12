@@ -5,17 +5,11 @@ import VueResource from 'vue-resource';
 import App from './App';
 import Welcome from './components/Welcome.vue';
 import DashBoard from './components/DashBoard.vue';
+import SignIn from './components/SignIn.vue';
 
-import { RadonInstall } from 'radon-ui';
 import 'bootstrap/less/bootstrap.less';
-import 'radon-ui/dist/static/css/dist.css';
-
 Vue.use(VueResource);
 Vue.use(VueRouter);
-Vue.use(RadonInstall, {
-  Notification: true,
-});
-
 const router = new VueRouter();
 router.map({
   '/index': {
@@ -23,6 +17,9 @@ router.map({
   },
   '/app': {
     component: DashBoard,
+  },
+  '/session': {
+    component: SignIn,
   },
 });
 router.redirect({

@@ -13,11 +13,29 @@ const appState = {
     index: 0,
     appName: '我的第一个项目',
     graphId: 'echartInstance0001', // 可以是数组形式
+    graphList: [
+      {
+        group: 'group2',
+        name: 'testName1',
+      }, {
+        group: 'group2',
+        name: 'testName2',
+      },
+    ],
   }],
   currentApp: {
     index: 0,
     appName: '我的第一个项目',
     graphId: 'echartInstance0001', // 可以是数组形式
+    graphList: [
+      {
+        group: 'group2',
+        name: 'testName1',
+      }, {
+        group: 'group2',
+        name: 'testName2',
+      },
+    ],
   },
   synchronization: {
     app: false,
