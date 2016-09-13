@@ -5,6 +5,7 @@
   "author": "codecosine <846400886@qq.com>",
   "private": true,
   "scripts": {
+    "start": "node ./build/www",
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
     "unit": "karma start test/unit/karma.conf.js --single-run",
@@ -15,7 +16,10 @@
   },
   "dependencies": {
     "babel-runtime": "^6.0.0",
+    "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-alpha.1",
     "echarts": "^3.2.3",
     "leancloud-storage": "^1.4.0",
     "radon-ui": "^0.2.0",
