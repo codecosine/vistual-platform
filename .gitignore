@@ -1,9 +1,10 @@
 .DS_Store
 node_modules/
 .idea/
-dist/
-server/node_modules/
+backend/node_modules/
+frontend/node_modules/
+frontend/dist/
 npm-debug.log
 selenium-debug.log
-test/unit/coverage
-test/e2e/reports
+frontend/test/unit/coverage
+frontend/test/e2e/reports
