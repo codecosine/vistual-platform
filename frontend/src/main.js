@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
+import VueValidator from 'vue-validator';
 
 import App from './App';
 import Welcome from './components/Welcome.vue';
@@ -11,6 +12,8 @@ import SignIn from './components/SignIn.vue';
 import 'bootstrap/less/bootstrap.less';
 Vue.use(VueResource);
 Vue.use(VueRouter);
+Vue.use(VueValidator);
+
 const router = new VueRouter();
 router.map({
   '/index': {

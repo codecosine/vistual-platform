@@ -29,7 +29,7 @@ mongoose.connect('mongodb://localhost/passport_local_mongoose_examples', functio
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public'));
 app.set('view engine', 'jade');
 
 
@@ -79,4 +79,9 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+
+app.set('port', process.env.PORT || 3000);
+
+app.listen(app.get('port'), function() {
+  console.log('server listening on port ', app.get('port'));
+});
