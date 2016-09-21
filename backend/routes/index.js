@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
   res.render('index.jade', { user: req.user });
 });
 
-router.post('/register', function(req, res, next) {
+router.post('api/register', function(req, res, next) {
   console.log('registering user');
   User.register(new User({username: req.body.username}), req.body.password, function(err) {
     if (err) {
@@ -20,14 +20,11 @@ router.post('/register', function(req, res, next) {
     res.redirect('/');
   });
 });
-router.get('/register', function(req, res) {
-  res.render('register', {});
-});
-router.get('/login', function(req, res) {
-  res.render('login', {user: req.user});
-});
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
+
+router.post('api/login', passport.authenticate('local'), function(req, res) {
+  console.log('login user');
+
   res.redirect('/');
 });
 
