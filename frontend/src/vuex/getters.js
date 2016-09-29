@@ -7,3 +7,4 @@ export const currentApp = (state) => state.application.currentApp;
 export const appList = (state) => state.application.appList;
 
 export const synchronization = (state) => state.storage.synchronization;
+export const userInfo = (state) => state.auth.user;

@@ -6,29 +6,29 @@
         <li><a><i class="glyphicon glyphicon-question-sign"></i>帮助</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">用户名</a></li>
+        <li><a href="#">{{userInfo.username}}</a></li>
       </ul>
     </nav>
   </div>
   <div class="app-main">
     <div class="container">
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" v-for="app in appList">
-          <div class="app-item clearfix text-center">
-            <div class="app-item-meta clearfix">
-              <a @click="gotoApp" class="btn btn-link app-item-name selectable-text app-set ng-binding" title="cosiner">{{app.appName}}</a>
+          <div class="app-item cf text-center">
+            <div class="app-item-meta cf">
+              <a @click="gotoApp(app.appId)" class="btn app-item-name">{{app.appName}}</a>
             </div>
-            <div class="app-item-stats">
+            <div class="app-item-stats cf">
               <div class="figure-wrap">
-                <span class="figure bstooltip ng-scope ng-binding" data-title="2" data-container="body" ng-attr-bs-tooltip="{{ app.total_user_count > 1000 ? '' : 'false' }}" bs-tooltip="false">2</span>
-                <div class="text-label cursor-help">图表</div>
+                <span class="figure bstooltip" data-title="2" data-container="body">2</span>
+                <div class="text-label">图表</div>
               </div>
               <div class="figure-wrap">
-                <span class="figure bstooltip ng-scope ng-binding" data-title="5" data-container="body" ng-attr-bs-tooltip="{{ app.yesterday_reqs > 1000 ? '' : 'false' }}" bs-tooltip="false">0</span>
-                <div class="text-label cursor-help">数据系列</div>
+                <span class="figure bstooltip" data-title="5" data-container="body">0</span>
+                <div class="text-label">数据系列</div>
               </div>
               <div class="figure-wrap">
-                <span class="figure bstooltip ng-scope ng-binding" data-title="0" data-container="body" ng-attr-bs-tooltip="{{ app.yesterday_reqs > 1000 ? '' : 'false' }}" bs-tooltip="false">0</span>
-                <div class="text-label cursor-help">分析</div>
+                <span class="figure bstooltip" data-title="0" data-container="body">0</span>
+                <div class="text-label">分析</div>
               </div>
             </div>
           </div>
@@ -39,33 +39,28 @@
       <div>
         <h2 id="overview" class="page-header">创建一个新的应用</h2>
         <div class="row">
-          <div class="col-xs-6 col-md-3">
-            <a href="#" class="thumbnail">
-              <img data-src="holder.js/100%x180" alt="100%x180" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjYwLjUiIHk9IjkwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTcxeDE4MDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+          <div class="col-xs-6 col-md-3" v-for="item in gallery">
+            <a href="#" class="thumbnail galleryList">
+              <img alt="item.name" v-bind:src="item.src" data-holder-rendered="true" >
             </a>
-          </div>
-          <div class="col-xs-6 col-md-3">
-            <a href="#" class="thumbnail">
-              <img data-src="holder.js/100%x180" alt="100%x180" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjYwLjUiIHk9IjkwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTcxeDE4MDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
-            </a>
-          </div>
-          <div class="col-xs-6 col-md-3">
-            <a href="#" class="thumbnail">
-              <img data-src="holder.js/100%x180" alt="100%x180" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjYwLjUiIHk9IjkwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTcxeDE4MDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
-            </a>
-          </div>
-          <div class="col-xs-6 col-md-3">
-            <a href="#" class="thumbnail">
-              <img data-src="holder.js/100%x180" alt="100%x180" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjYwLjUiIHk9IjkwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTcxeDE4MDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
-            </a>
+            <span class="text-center">{{item.name}}</span>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 <style scoped>
+
+  .cf:before,
+  .cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+  }
+
+  .cf:after {
+    clear: both;
+  }
   .app-item {
     position: relative;
     margin-bottom: 30px;
@@ -73,10 +68,15 @@
     border-radius: 4px;
     transition: color .2s ease,border .2s ease;
   }
+  .app-item:hover, .app-item:focus {
+    border-color: #3090e4;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.06);
+  }
   .app-item .app-item-stats {
     padding: 0 15px 12px;
   }
   .app-item-name {
+    color: #3090e4;
     font-size: 18px;
     margin: 0;
     padding: 0;
@@ -94,14 +94,8 @@
     width: calc(100% / 3);
     float: left;
   }
-  .app-item .app-item-meta .app-item-settings {
-    position: absolute;
-    color: #e5e5e5;
-    text-decoration: none;
-    line-height: 32px;
-    top: 15px;
-    right: 13px;
-    transition: color .2s ease;
+  .app-item .app-item-meta{
+    padding: 10px 0px;
   }
   .app-item .app-item-stats .figure {
     font-family: radikal,"Helvetica Neue",Helvetica,"PingFang SC","Microsoft Yahei","WenQuanYi Micro Hei",Arial,Verdana,sans-serif;
@@ -115,10 +109,6 @@
     color: #999;
     font-size: 12px;
     font-weight: 300;
-  }
-  .cursor-help {
-    cursor: help;
-    vertical-align: 1px;
   }
   .app-header {
     height: 5rem;
@@ -134,28 +124,53 @@
   .app-main {
     margin-top: 40px;
   }
+  .galleryList{
+    height: 180px;
+    width: 100%;
+    display: block;
+  }
 
 </style>
 <script>
   import { selectApp } from '../vuex/actions';
-  import { appList } from '../vuex/getters';
+  import { appList, userInfo } from '../vuex/getters';
   export default {
     data() {
       return {
         showArg: false,
+        gallery: [
+          {
+            name: 'bar-mark',
+            src: require('../assets/img/gallery/bar-mark.png'), // eslint-disable-line
+          },
+          {
+            name: 'bar-stack',
+            src: require('../assets/img/gallery/bar-stack.png'), // eslint-disable-line
+          },
+          {
+            name: 'mix-line-bar',
+            src: require('../assets/img/gallery/mix-line-bar.png'), // eslint-disable-line
+          },
+          {
+            name: 'pie-doughnut',
+            src: require('../assets/img/gallery/pie-doughnut.png'), // eslint-disable-line
+          },
+        ],
       };
     },
     vuex: {
       getters: {
         appList,
+        userInfo,
       },
       actions: {
         selectApp,
       },
     },
-    method: {
-      gotoApp() {
-        this.$router.router.go({ name: 'user', params: { userId: 123 } });
+    methods: {
+      gotoApp(id) {
+        console.log(id);
+        this.$router.go({ name: 'main'});
       },
     },
   };

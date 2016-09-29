@@ -8,7 +8,7 @@
         <li><a><i class="glyphicon glyphicon-refresh"></i></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a><i class="glyphicon glyphicon-user"></i>用户名</a></li>
+        <li><a href="#">{{userInfo.username}}</a></li>
       </ul>
     </nav>
   </div>
@@ -26,7 +26,8 @@
         <button type="submit" class="btn btn-default">Submit form</button>
       </form>
       <div v-for="graph in currentApp.graphList">
-        <v-echarts :options="graphOptions[graph.group]" :group="graph.group"></v-echarts>
+        <div>group:{{graph.group}}</div>
+        <v-echarts :options="graphOptions[graph.graphName]" :group="graph.group" class="col-md-12"></v-echarts>
       </div>
     </div>
   </div>
@@ -78,7 +79,7 @@
   import echarts from './ECharts.vue';
   import { select, option, aside, input } from 'vue-strap';
   import { initGraph, updateType } from '../vuex/actions';
-  import { graphOptions, appList, currentApp } from '../vuex/getters';
+  import { graphOptions, appList, currentApp, userInfo } from '../vuex/getters';
   export default {
     components: {
       aside,
@@ -108,6 +109,7 @@
         graphOptions,
         appList,
         currentApp,
+        userInfo,
       },
       actions: {
         initGraph,

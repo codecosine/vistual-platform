@@ -27,3 +27,9 @@ export function signOut() {
 export function isLogin() {
   return !!cookie.load('token');
 }
+//判断是否登录，（可以通过接口，Vuex状态 token）
+//没有登录走下面逻辑
+// let redirect = encodeURIComponent(transition.to.path);
+// transition.redirect('/logon?redirect=' + redirect);
+//redirect 作为参数，登录之后跳转回来
+// return AuthService.isLoggedIn()

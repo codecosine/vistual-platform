@@ -85,10 +85,13 @@
       },
       methods: {
         signIn() {
-          this.$http.post('api/login', this.$validationSignIn);
+          this.$http.post('api/login', {});
+          this.$router.go({ name: 'application', params: { appId: id } });
+
         },
         signUp() {
-          this.$http.post('api/register', this.$validationSignUp);
+          this.$http.post('api/register', {});
+
         },
         switch() {
           this.formState = !this.formState;

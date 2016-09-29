@@ -12,8 +12,8 @@
           <li><a href="#">帮助</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">登录</a></li>
-          <li><a href="#">注册</a></li>
+          <li><a href="#" v-link="{ path: '/session' }">登录</a></li>
+          <li><a href="#" v-link="{ path: '/session' }">注册</a></li>
         </ul>
       </nav>
     </div>
@@ -37,7 +37,6 @@
                   <span class="glyphicon glyphicon-info-sign"></span>
                   登录失败!用户名或者密码错误,请重试.
                 </p>
-
               </div>
               <div class="form-group">
                 <label for="username">用户名/邮箱</label>
@@ -53,7 +52,6 @@
                 <a>注册新用户</a>
               </p>
             </form>
-
           </div>
         </div>
       </div>
@@ -88,14 +86,14 @@
         <div class="col-sm-3 col-xs-12">
           <div class="step_item">
             <p class="step_img">
-              <img src="../assets/img/gallery/scatter-painter-choice.png">
+              <img src="../assets/img/gallery/pie-nest.png">
             </p>
           </div>
         </div>
         <div class="col-sm-3 col-xs-12">
           <div class="step_item">
             <p class="step_img">
-              <img src="../assets/img/gallery/scatter-large.png">
+              <img src="../assets/img/gallery/scatter-punchCard.png">
             </p>
           </div>
         </div>
@@ -103,14 +101,14 @@
           <div class="step_item">
 
             <p class="step_img">
-              <img src="../assets/img/gallery/heatmap-cartesian.png">
+              <img src="../assets/img/gallery/mix-timeline-finance.png">
             </p>
           </div>
         </div>
         <div class="col-sm-3 col-xs-12">
           <div class="step_item">
             <p class="step_img">
-              <img src="../assets/img/gallery/treemap-disk.png">
+              <img src="../assets/img/gallery/scatter-weight.png">
             </p>
           </div>
         </div>

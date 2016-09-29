@@ -9,31 +9,47 @@ import {
   UPDATE_ORIGINSETTING,
 } from '../mutation-types';
 const appState = {
-  appList: [{
-    index: 0,
-    appName: '我的第一个项目',
-    graphId: 'echartInstance0001', // 可以是数组形式
-    graphList: [
-      {
-        group: 'group2',
-        name: 'testName1',
-      }, {
-        group: 'group2',
-        name: 'testName2',
-      },
-    ],
-  }],
+  appList: [
+    {
+      appId: 0,
+      appName: '我的第一个项目',
+      graphId: 'echartInstance0001', // 可以是数组形式
+      graphList: [
+        {
+          group: 'group2',
+          name: 'testName1',
+        }, {
+          group: 'group2',
+          name: 'testName2',
+        },
+      ],
+    }, {
+      appId: 1,
+      appName: '我的第二个项目',
+      graphId: 'echartInstance0002', // 可以是数组形式
+      graphList: [
+        {
+          group: 'group2',
+          name: 'testName1',
+        }, {
+          group: 'group2',
+          name: 'testName2',
+        },
+      ],
+    },
+  ],
   currentApp: {
     index: 0,
     appName: '我的第一个项目',
+    appId: '0001',
     graphId: 'echartInstance0001', // 可以是数组形式
     graphList: [
       {
         group: 'group2',
-        name: 'testName1',
+        graphName: 'graphName2',
       }, {
-        group: 'group2',
-        name: 'testName2',
+        group: 'group1',
+        graphName: 'graphName1',
       },
     ],
   },

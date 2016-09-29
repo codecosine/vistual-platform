@@ -17,18 +17,30 @@ Vue.use(VueValidator);
 const router = new VueRouter();
 router.map({
   '/index': {
+    name: 'index',
     component: Welcome,
-  },
-  '/app': {
-    component: DashBoard,
-  },
-  '/app/user/:userId': {
-    name: 'application',
-    component: Application,
   },
   '/session': {
     component: SignIn,
   },
+  '/app': {
+    name: 'main',
+    component: DashBoard,
+    auth: true,
+  },
+  '/app/operation/:appId': {
+    name: 'application',
+    component: Application,
+    auth: true,
+  },
+});
+router.beforeEach(function (transition) {
+  if (transition.to.auth) {
+
+
+  } else {
+    transition.next();
+  }
 });
 router.redirect({
   '*': '/index',

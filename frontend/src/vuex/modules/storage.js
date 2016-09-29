@@ -2,55 +2,78 @@
  * Created by cosine on 2016/9/9.
  */
 import {
-  GET_GRAPHLIST,
+  GET_GRAPH_OPTIONS,
+  GET_GRAPH_SERIES,
 } from '../mutation-types';
 const storageState = {
   graphOptions: {
-    group1: {
-      polar: {
-        title: {
-          text: '极坐标双数值轴',
-        },
-        legend: {
-          data: ['line'],
-        },
-        polar: {
-          center: ['50%', '54%'],
-        },
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'cross',
-          },
-        },
-        angleAxis: {
-          type: 'value',
-          startAngle: 0,
-        },
-        radiusAxis: {
-          min: 0,
-        },
-        series: [
-          {
-            coordinateSystem: 'polar',
-            name: 'line',
-            type: 'line',
-            showSymbol: false,
-            data: (function () {
-              const data = [];
-              for (let i = 0; i <= 360; i++) {
-                const t = i / 180 * Math.PI;
-                const r = Math.sin(2 * t) * Math.cos(2 * t);
-                data.push([r, i]);
-              }
-              return data;
-            }()),
-          },
-        ],
-        animationDuration: 2000,
+    graphName1: {
+      title: {
+        text: '一天用电量分布',
       },
+      tooltip: {
+        trigger: 'axis',
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15',
+          '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00',
+          '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45'],
+      },
+      yAxis: {
+        type: 'value',
+        axisLabel: {
+          formatter: '{value} W',
+        },
+      },
+      visualMap: {
+        show: false,
+        dimension: 0,
+        pieces: [{
+          lte: 6,
+          color: 'green',
+        }, {
+          gt: 6,
+          lte: 8,
+          color: 'red',
+        }, {
+          gt: 8,
+          lte: 14,
+          color: 'green',
+        }, {
+          gt: 14,
+          lte: 17,
+          color: 'red',
+        }, {
+          gt: 17,
+          color: 'green',
+        }],
+      },
+      series: [
+        {
+          name: '用电量',
+          type: 'line',
+          smooth: true,
+          data: [300, 280, 250, 260, 270, 300, 550, 500, 400, 390,
+            380, 390, 400, 500, 600, 750, 800, 700, 600, 400],
+          markArea: {
+            data: [[{
+              name: '早高峰',
+              xAxis: '07:30',
+            }, {
+              xAxis: '10:00',
+            }], [{
+              name: '晚高峰',
+              xAxis: '17:30',
+            }, {
+              xAxis: '21:15',
+            }]],
+          },
+        },
+      ],
     },
-    group2: {
+    graphName2: {
       title: {
         text: '折线图堆叠',
       },
@@ -96,9 +119,13 @@ const storageState = {
   },
 };
 const mutations = {
-  [GET_GRAPHLIST](state, data) {
+  [GET_GRAPH_OPTIONS](state, data) {
     const innerState = state;
-    innerState.graphList = data;
+    innerState.graphOptions = data;
+  },
+  [GET_GRAPH_SERIES](state, data) {
+    const innerState = state;
+    innerState.dataSeries = data;
   },
 };
 
