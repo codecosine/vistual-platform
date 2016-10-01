@@ -1,16 +1,4 @@
 <template>
-  <div class="app-header">
-    <nav>
-      <ul class="nav navbar-nav">
-        <li><a><i class="glyphicon glyphicon-th"></i>应用</a></li>
-        <li><a><i class="glyphicon glyphicon-question-sign"></i>帮助</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">{{userInfo.username}}</a></li>
-      </ul>
-    </nav>
-  </div>
-  <div class="app-main">
     <div class="container">
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" v-for="app in appList">
           <div class="app-item cf text-center">
@@ -39,16 +27,28 @@
       <div>
         <h2 id="overview" class="page-header">创建一个新的应用</h2>
         <div class="row">
-          <div class="col-xs-6 col-md-3" v-for="item in gallery">
-            <a href="#" class="thumbnail galleryList">
+          <div v-show="!showCreate" class="col-xs-6 col-md-3" v-for="item in gallery">
+            <a @click="gotoCreate(item.name)" class="thumbnail galleryList">
               <img alt="item.name" v-bind:src="item.src" data-holder-rendered="true" >
             </a>
             <span class="text-center">{{item.name}}</span>
           </div>
+          <div v-show="showCreate">
+            <div class="col-lg-6">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button @click="showCreate=false" class="btn btn-default" type="button">所选图表:{{createApp.graphName}}</button>
+                </span>
+                <input type="text" class="form-control" placeholder="新建应用名称" v-model="createApp.name">
+                <span class="input-group-btn">
+                  <button @click="gotoNewApp" class="btn btn-default" type="button">下一步</button>
+                </span>
+              </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </template>
 <style scoped>
 
@@ -138,6 +138,11 @@
     data() {
       return {
         showArg: false,
+        showCreate: false,
+        createApp: {
+          name: '',
+          graphName: '',
+        },
         gallery: [
           {
             name: 'bar-mark',
@@ -168,9 +173,15 @@
       },
     },
     methods: {
+      gotoCreate(graphName) {
+        this.showCreate = true;
+        this.createApp.graphName = graphName;
+      },
+      gotoNewApp() {
+        this.$router.go({ name: 'editor', params: { appId: 123 } });
+      },
       gotoApp(id) {
-        console.log(id);
-        this.$router.go({ name: 'main'});
+        this.$router.go({ name: 'exhibition', params: { appId: id } });
       },
     },
   };

@@ -112,7 +112,18 @@ const storageState = {
       ],
     },
   },
-  dataSeries: null,
+  dataSeries: {
+    dataName1: {
+      type: 'default',
+      dimension: 1,
+      data: [1, 2, 3, 4, 5, 6, 6],
+    },
+    dataName2: {
+      type: 'default',
+      dimension: 1,
+      data: ['男生'],
+    },
+  },
   synchronization: {
     graphList: false,
     dataSeries: false,

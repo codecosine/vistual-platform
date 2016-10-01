@@ -183,7 +183,7 @@
   export default {
     methods: {
       signIn() {
-        this.$route.router.go({ name: 'application', params: { userId: 123 } });
+        this.$route.router.go({ name: 'main' });
       },
     },
   };

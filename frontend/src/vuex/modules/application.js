@@ -11,9 +11,7 @@ import {
 const appState = {
   appList: [
     {
-      appId: 0,
       appName: '我的第一个项目',
-      graphId: 'echartInstance0001', // 可以是数组形式
       graphList: [
         {
           group: 'group2',
@@ -24,9 +22,7 @@ const appState = {
         },
       ],
     }, {
-      appId: 1,
       appName: '我的第二个项目',
-      graphId: 'echartInstance0002', // 可以是数组形式
       graphList: [
         {
           group: 'group2',
@@ -38,21 +34,7 @@ const appState = {
       ],
     },
   ],
-  currentApp: {
-    index: 0,
-    appName: '我的第一个项目',
-    appId: '0001',
-    graphId: 'echartInstance0001', // 可以是数组形式
-    graphList: [
-      {
-        group: 'group2',
-        graphName: 'graphName2',
-      }, {
-        group: 'group1',
-        graphName: 'graphName1',
-      },
-    ],
-  },
+  currentApp: 0,
   synchronization: {
     app: false,
     origin: false,

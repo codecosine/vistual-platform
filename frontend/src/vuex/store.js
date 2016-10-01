@@ -3,7 +3,7 @@
  */
 import Vue from 'vue';
 import Vuex from 'vuex';
-import activeGraph from './modules/activeGraph';
+import operation from './modules/operation';
 import auth from './modules/auth';
 import application from './modules/application';
 import storage from './modules/storage';
@@ -16,7 +16,7 @@ const debug = process.env.NODE_ENV !== 'production';
 export default new Vuex.Store({
   modules: {
     application,
-    activeGraph,
+    operation,
     auth,
     storage,
   },

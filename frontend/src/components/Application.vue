@@ -4,8 +4,6 @@
       <ul class="nav navbar-nav">
         <li><a><i class="glyphicon glyphicon-th"></i>应用</a></li>
         <li><a><i class="glyphicon glyphicon-question-sign"></i>帮助</a></li>
-        <li><a><i class="glyphicon glyphicon-menu-hamburger"></i></a></li>
-        <li><a><i class="glyphicon glyphicon-refresh"></i></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">{{userInfo.username}}</a></li>
@@ -13,51 +11,68 @@
     </nav>
   </div>
   <div class="app-main">
-    <div class="container">
-      <v-select>
-        <v-option value="apple">Apple</v-option>
-        <v-option value="banana">Banana</v-option>
-        <v-option value="cherry">Cherry</v-option>
-        <v-option value="orange">Orange</v-option>
-        <v-option value="grape">Grape</v-option>
-      </v-select>
-      <form action="./#select" method="get">
-        <v-select :value.sync="select.value" :options="select.test" multiple name="animals[]" limit="3" search justified required disabled clear-button close-on-select></v-select>
-        <button type="submit" class="btn btn-default">Submit form</button>
-      </form>
-      <div v-for="graph in currentApp.graphList">
-        <div>group:{{graph.group}}</div>
-        <v-echarts :options="graphOptions[graph.graphName]" :group="graph.group" class="col-md-12"></v-echarts>
-      </div>
-    </div>
+    <router-view></router-view>
   </div>
-  <aside :show.sync="showArg" placement="left" header="配置图表参数" :width="350">
-  </aside>
 </template>
-<style scoped>
+<style>
+
+  .cf:before,
+  .cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+  }
+
+  .cf:after {
+    clear: both;
+  }
   .app-item {
     position: relative;
     margin-bottom: 30px;
-    border: 1px solid #eee;
+    border: 1px solid #ccc;
     border-radius: 4px;
     transition: color .2s ease,border .2s ease;
   }
+  .app-item:hover, .app-item:focus {
+    border-color: #3090e4;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.06);
+  }
   .app-item .app-item-stats {
     padding: 0 15px 12px;
+  }
+  .app-item-name {
+    color: #3090e4;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    line-height: 32px;
+    font-weight: 700;
+    max-width: 80%;
+    max-width: calc(100% - 100px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 0;
   }
   .app-item .app-item-stats .figure-wrap {
     width: 33.33%;
     width: calc(100% / 3);
     float: left;
   }
-  .app-item .app-item-meta .app-item-settings {
-    position: absolute;
-    color: #e5e5e5;
-    text-decoration: none;
-    line-height: 32px;
-    top: 15px;
-    right: 13px;
+  .app-item .app-item-meta{
+    padding: 10px 0px;
+  }
+  .app-item .app-item-stats .figure {
+    font-family: radikal,"Helvetica Neue",Helvetica,"PingFang SC","Microsoft Yahei","WenQuanYi Micro Hei",Arial,Verdana,sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.1;
+    color: #555;
     transition: color .2s ease;
+  }
+  .app-item .app-item-stats .text-label {
+    color: #999;
+    font-size: 12px;
+    font-weight: 300;
   }
   .app-header {
     height: 5rem;
@@ -73,47 +88,19 @@
   .app-main {
     margin-top: 40px;
   }
+  .galleryList{
+    height: 180px;
+    width: 100%;
+    display: block;
+  }
 
 </style>
 <script>
-  import echarts from './ECharts.vue';
-  import { select, option, aside, input } from 'vue-strap';
-  import { initGraph, updateType } from '../vuex/actions';
-  import { graphOptions, appList, currentApp, userInfo } from '../vuex/getters';
+  import { userInfo } from '../vuex/getters';
   export default {
-    components: {
-      aside,
-      VEcharts: echarts,
-      VSelect: select,
-      VOption: option,
-      BsInput: input,
-    },
-    data() {
-      return {
-        showArg: false,
-        value: '',
-        test: [
-          { value: 1, label: 'Cat' },
-          { value: 2, label: 'Cow' },
-          { value: 3, label: 'Dog' },
-          { value: 4, label: 'Elephant' },
-          { value: 5, label: 'Fish' },
-          { value: 6, label: 'Lion' },
-          { value: 7, label: 'Tiger' },
-          { value: 8, label: 'Turtle' },
-        ],
-      };
-    },
     vuex: {
       getters: {
-        graphOptions,
-        appList,
-        currentApp,
         userInfo,
-      },
-      actions: {
-        initGraph,
-        updateType,
       },
     },
   };

@@ -86,12 +86,10 @@
       methods: {
         signIn() {
           this.$http.post('api/login', {});
-          this.$router.go({ name: 'application', params: { appId: id } });
-
+          this.$router.go({ name: 'application' });
         },
         signUp() {
           this.$http.post('api/register', {});
-
         },
         switch() {
           this.formState = !this.formState;
