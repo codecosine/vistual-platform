@@ -5,10 +5,12 @@ import {
   AUTH_SUCCESS,
   SIGNIN_SUCCESS,
   LOGOUT_SUCCESS,
+  SIGNIN_REQUEST,
 } from '../mutation-types';
 
 const authState = {
   token: null,
+  signIn_request: false,
   user: {
     username: '未登录',
     authId: '',
@@ -22,7 +24,12 @@ const mutations = {
   },
   [SIGNIN_SUCCESS](state, data) {
     const innerState = state;
+    innerState.signIn_request = false;
     innerState.user = data.user;
+  },
+  [SIGNIN_REQUEST](state) {
+    const innerState = state;
+    innerState.signIn_request = true;
   },
   [LOGOUT_SUCCESS](state) {
     const innerState = state;

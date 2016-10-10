@@ -4,10 +4,11 @@
 export const INIT_OPTION = 'INIT_OPTION';
 export const UPDATE_OPTION = 'UPDATE_OPTION';
 export const UPDATE_TYPE = 'UPDATE_TYPE';
-
+// Auth
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const SIGNIN_REQUEST = 'SIGNIN_REQUEST';
 
 export const GET_APPLIST = 'GET_APPLIST';
 export const ADD_APP = 'ADD_APP';

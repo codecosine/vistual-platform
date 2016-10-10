@@ -45,22 +45,14 @@ router.map({
       },
     },
   },
-
 });
 
-router.beforeEach(function ({ to, next }) {
+router.beforeEach(({ to }) => {
   if (to.auth) {
-      return AuthService.isLoggedIn(to.router.app.$store.state.auth.token);
-  } else {
-    next()
+    return AuthService.isLoggedIn(to.router.app.$store.state.auth.token);
   }
+  return true;
 });
-router.start({
-  created () {
-    AuthService.getToken()
-  },
-  name: 'mobile'
-}, 'body');
 router.redirect({
   '*': '/index',
 });

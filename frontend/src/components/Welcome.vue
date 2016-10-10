@@ -180,17 +180,24 @@
 
 </style>
 <script>
-  import { auth } from '../vuex/actions';
+  import { login, saveToken } from '../vuex/actions';
   export default {
     vuex: {
       actions: {
-        auth,
+        login,
+        saveToken,
       },
     },
     methods: {
       signIn() {
-        this.auth();
-        this.$route.router.go({ name: 'main' });
+        this.login(this.user)
+          .then((res) => {
+            const token = res.data.token;
+            this.saveToken(token);
+            this.$route.router.go({ name: 'main' });
+          }, (err) => {
+            console.log(err);
+          });
       },
     },
   };

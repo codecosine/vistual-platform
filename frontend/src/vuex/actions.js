@@ -15,8 +15,6 @@ export const updateGraph = ({ dispatch }, option) => {
 export const updateType = ({ dispatch }, type) => {
   dispatch(types.UPDATE_TYPE, type);
 };
-
-
 // Application
 export const selectApp = ({ dispatch }, id) => {
   dispatch(types.UPDATE_CURRENTAPP, id);
@@ -26,11 +24,16 @@ export const selectApp = ({ dispatch }, id) => {
 export const tokenLogin = () => {
   console.log('tokenLogin');
 };
-export const saveToken = (token) => {
-  AuthService.saveToken(token);
+export const saveToken = ({ dispatch }, token) => {
+  dispatch(types.AUTH_SUCCESS, token);
+  return AuthService.saveToken(token);
 };
-export const fetchToken = () => window.localStorage.getItem(types.TOKEN_KEY);
-export const auth = ({ dispatch }) => {
-  window.localStorage.setItem(types.TOKEN_KEY, 'cosine');
-  dispatch(types.AUTH_SUCCESS, 'cosine');
+
+export const login = ({ dispatch }, user) => {
+  dispatch(types.SIGNIN_REQUEST);
+  return AuthService.login(user);
+};
+export const register = ({ dispatch }, user) => {
+  dispatch(types.SIGNIN_REQUEST);
+  return AuthService.register(user);
 };

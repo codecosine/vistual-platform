@@ -13,8 +13,25 @@
 </style>
 <script>
   import store from './vuex/store';
+  import { tokenLogin } from './vuex/actions';
+  import AuthService from './api/AuthService';
   export default {
     store,
+    vuex: {
+      actions: {
+        tokenLogin,
+      },
+    },
+    created() {
+      AuthService.fetchToken()
+        .then((res) => {
+          console.log('fetchToken');
+          console.log(res);
+          this.tokenLogin(res);
+        }, (err) => {
+          console.log(err);
+        });
+    },
   };
 </script>
 

@@ -11,11 +11,11 @@
         <form role="form" class="center-block auth-modal auth-modal-inner">
             <div class="form-group">
               <label for="username">用户名/邮箱</label>
-              <input id="username" type="text" v-validate:username="['required']" class="form-control">
+              <input id="username" type="text" v-model="user.username" v-validate:username="['required']" class="form-control">
             </div>
             <div class="form-group">
               <label for="password">密码</label>
-              <input type="password" class="form-control" id="password" v-validate:password="['required']" >
+              <input id="password" type="password" v-model="user.password" v-validate:password="['required']" class="form-control" >
             </div>
             <button type="submit" @click="signIn" class="btn btn-block btn-danger" v-bind:disabled="!$validationSignIn.valid">登录</button>
         </form>
@@ -27,11 +27,11 @@
         <form role="form" class="center-block auth-modal auth-modal-inner">
           <div class="form-group">
             <label for="Rusername">注册用户名/邮箱</label>
-            <input id="Rusername" type="text" v-validate:Rusername="['required']" class="form-control">
+            <input id="Rusername" type="text" v-model="registerUser.username" v-validate:Rusername="['required']" class="form-control">
           </div>
           <div class="form-group">
           <label for="Rpassword">密码</label>
-          <input type="password" class="form-control" id="Rpassword" v-validate:password="['required']" >
+          <input type="password" class="form-control" v-model="registerUser.password" id="Rpassword" v-validate:password="['required']" >
            </div>
           <button type="submit" @click="signUp" class="btn btn-block btn-danger" v-bind:disabled="!$validationSignUp.valid">注册</button>
         </form>
@@ -72,14 +72,21 @@
 </style>
 <script>
     import { alert } from 'vue-strap';
-    import { auth } from '../vuex/actions';
-
+    import { login, register, saveToken } from '../vuex/actions';
     export default{
       components: {
         alert,
       },
       data() {
         return {
+          user: {
+            username: '',
+            password: '',
+          },
+          registerUser: {
+            username: '',
+            password: '',
+          },
           signInError: false,
           signUpError: false,
           formState: true,
@@ -87,16 +94,30 @@
       },
       vuex: {
         actions: {
-          auth,
+          login,
+          register,
+          saveToken,
         },
       },
       methods: {
         signIn() {
-          this.$http.post('api/login', {});
-          this.$router.go({ name: 'application' });
+          this.login(this.user)
+            .then((res) => {
+              const token = res.token;// res.data.token
+              this.saveToken(token);
+              this.$route.router.go({ name: 'main' });
+            }, (err) => {
+              console.log(err);
+            });
         },
         signUp() {
-          this.$http.post('api/register', {});
+          this.register(this.registerUser)
+            .then((res) => {
+              const token = res.data.token;
+              this.saveToken(token);
+            }, (err) => {
+              console.log(err);
+            });
         },
         switch() {
           this.formState = !this.formState;
