@@ -1,17 +1,4 @@
 <template>
-  <div class="app-header">
-    <nav>
-      <ul class="nav navbar-nav">
-        <li><a><i class="glyphicon glyphicon-th"></i>应用</a></li>
-        <li><a><i class="glyphicon glyphicon-question-sign"></i>帮助</a></li>
-        <li><a><i class="glyphicon glyphicon-menu-hamburger"></i></a></li>
-        <li><a><i class="glyphicon glyphicon-refresh"></i></a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">{{userInfo.username}}</a></li>
-      </ul>
-    </nav>
-  </div>
   <div class="app-main">
     <div class="container">
       <v-select>
