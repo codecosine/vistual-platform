@@ -180,9 +180,16 @@
 
 </style>
 <script>
+  import { auth } from '../vuex/actions';
   export default {
+    vuex: {
+      actions: {
+        auth,
+      },
+    },
     methods: {
       signIn() {
+        this.auth();
         this.$route.router.go({ name: 'main' });
       },
     },

@@ -72,6 +72,8 @@
 </style>
 <script>
     import { alert } from 'vue-strap';
+    import { auth } from '../vuex/actions';
+
     export default{
       components: {
         alert,
@@ -82,6 +84,11 @@
           signUpError: false,
           formState: true,
         };
+      },
+      vuex: {
+        actions: {
+          auth,
+        },
       },
       methods: {
         signIn() {

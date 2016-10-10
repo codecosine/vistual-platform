@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 import VueValidator from 'vue-validator';
+import AuthService from './api/AuthService';
 
 import App from './App';
 import Welcome from './components/Welcome.vue';
@@ -46,15 +47,20 @@ router.map({
   },
 
 });
-/*
-  router.beforeEach(function (transition) {
-  if (transition.to.auth) {
 
-
+router.beforeEach(function ({ to, next }) {
+  if (to.auth) {
+      return AuthService.isLoggedIn(to.router.app.$store.state.auth.token);
   } else {
-    transition.next();
+    next()
   }
-});*/
+});
+router.start({
+  created () {
+    AuthService.getToken()
+  },
+  name: 'mobile'
+}, 'body');
 router.redirect({
   '*': '/index',
 });
