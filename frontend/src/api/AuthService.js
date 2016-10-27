@@ -4,35 +4,38 @@
 import Vue from 'vue';
 const TOKEN_KEY = 'TOKEN_KEY';
 function isLoggedIn(token) {
-  console.log(token);
+  if (!token) {
+    return false;
+    // return true; // 调试使用
+  }
   return new Promise((resolve) => {
-    Vue.http.post('/token', { token })
-     .then(
-       (res) => {
-         if (res.data) {
-           resolve(true);
-         }
-       }, () => {
-         console.log('token false');
-         resolve(false);
-       }
+    Vue.http.post('/users/token', { token })
+      .then(
+        (res) => {
+          if (res.data) {
+            resolve(true);
+          }
+        }, () => {
+          console.log('token false');
+          resolve(false);
+        }
     );
   });
 }
 
 function login(user) {
   // fade login
-  return new Promise((resolve) => {
-    const res = {
-      token: 'TEST_TOKEN_COSINE',
-      info: user,
-    };
-    resolve(res);
-  });
-  // return Vue.http.post('/login', user);
+  // return new Promise((resolve) => {
+  //   const res = {
+  //     token: 'TEST_TOKEN_COSINE',
+  //     info: user,
+  //   };
+  //   resolve(res);
+  // });
+  return Vue.http.post('/users/auth', user);
 }
 function register(user) {
-  return Vue.http.post('/register ', user);
+  return Vue.http.post('/users/register', user);
 }
 function saveToken(token) {
   return window.localStorage.setItem(TOKEN_KEY, JSON.stringify(token));

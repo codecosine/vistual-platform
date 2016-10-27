@@ -5,8 +5,7 @@
       <validator name="validationSignIn" v-if="formState">
         <alert :show.sync="signInError" class="center-block" duration="0" type="danger" width="350px" dismissable>
           <span class="glyphicon glyphicon-info-sign"></span>
-          <strong v-if="$validationSignIn.username.required">请输入用户名</strong>
-          <strong v-if="$validationSignIn.username.required">用户名或者密码错误，请重试</strong>
+          <strong>{{ errmsg }}</strong>
         </alert>
         <form role="form" class="center-block auth-modal auth-modal-inner">
             <div class="form-group">
@@ -23,6 +22,7 @@
       <validator name="validationSignUp" v-if="!formState">
         <alert :show.sync="signUpError" class="center-block" duration="0" type="danger" width="350px" dismissable>
           <span class="glyphicon glyphicon-info-sign"></span>
+          <strong>{{ errmsg }}</strong>
         </alert>
         <form role="form" class="center-block auth-modal auth-modal-inner">
           <div class="form-group">
@@ -73,6 +73,7 @@
 <script>
     import { alert } from 'vue-strap';
     import { login, register, saveToken } from '../vuex/actions';
+
     export default{
       components: {
         alert,
@@ -89,6 +90,7 @@
           },
           signInError: false,
           signUpError: false,
+          errormsg: '未知错误，请刷新',
           formState: true,
         };
       },
@@ -107,7 +109,10 @@
               this.saveToken(token);
               this.$route.router.go({ name: 'main' });
             }, (err) => {
-              console.log(err);
+              if (err.status === 401) {
+                this.signInError = true;
+                this.errmsg = '用户名或密码错误，请重试！';
+              }
             });
         },
         signUp() {
@@ -116,7 +121,10 @@
               const token = res.data.token;
               this.saveToken(token);
             }, (err) => {
-              console.log(err);
+              if (err.status === 401) {
+                this.signInError = true;
+                this.errmsg = '该用户名已经存在！';
+              }
             });
         },
         switch() {

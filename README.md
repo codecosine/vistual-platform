@@ -1,29 +1,24 @@
 # vistual-platform
 
-> 数字校园项目@0.0.2
+可视化图表 -- 数字校园
+@ version 0.2.0
 
-功能暂不完善。
-
+backend:
+	mongo+mongoose+passport-jwt+express
+frontend:
+	vue 1.0 + vuex +vue-router + echarts 
 ## Build Setup
 
 ``` bash
 # install dependencies
+cd frontend
 npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
 
 # build for production with minification
 npm run build
 
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
+# install dependencies
+cd backend
+npm install
+cp ../frontend/dist to /public/
 

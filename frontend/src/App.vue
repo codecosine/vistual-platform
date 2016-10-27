@@ -23,6 +23,7 @@
       },
     },
     created() {
+      // 在应用第一次加载的时候，尝试读取本地的cookie 以及 localStorage 进行权限验证获取token
       AuthService.fetchToken()
         .then((res) => {
           console.log('fetchToken');
@@ -34,4 +35,3 @@
     },
   };
 </script>
-

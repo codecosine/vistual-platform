@@ -49,6 +49,7 @@ router.map({
 
 router.beforeEach(({ to }) => {
   if (to.auth) {
+    // 在权限跳转前，尝试使用vuex中的token进行验证
     return AuthService.isLoggedIn(to.router.app.$store.state.auth.token);
   }
   return true;

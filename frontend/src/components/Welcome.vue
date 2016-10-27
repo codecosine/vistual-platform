@@ -31,27 +31,27 @@
             </div>
           </div>
           <div class="col-sm-6">
-            <form role="form" class="center-block auth-modal auth-modal-inner">
-              <div class="center-block">
-                <p class="text-danger">
-                  <span class="glyphicon glyphicon-info-sign"></span>
-                  登录失败!用户名或者密码错误,请重试.
-                </p>
-              </div>
-              <div class="form-group">
-                <label for="username">用户名/邮箱</label>
-                <input type="email" class="form-control" id="username">
-              </div>
-              <div class="form-group">
-                <label for="inputpassword">密码</label>
-                <input type="password" class="form-control" id="inputpassword">
-              </div>
-              <button type="button" @click="signIn" class="btn btn-block btn-danger">登录</button>
-              <p class="create-account-callout center-block">
-                没有账号?
-                <a>注册新用户</a>
-              </p>
-            </form>
+            <validator name="validationSignIn">
+              <alert :show.sync="signInError" class="center-block" duration="0" type="danger" width="350px" dismissable>
+                <span class="glyphicon glyphicon-info-sign"></span>
+                <strong>{{ errormsg }}</strong>
+              </alert>
+              <form role="form" class="center-block auth-modal auth-modal-inner">
+                  <div class="form-group">
+                    <label for="username">用户名/邮箱</label>
+                    <input id="username" type="text" v-model="user.username" v-validate:username="['required']" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">密码</label>
+                    <input id="password" type="password" v-model="user.password" v-validate:password="['required']" class="form-control" >
+                  </div>
+                  <button type="submit" @click="signIn" class="btn btn-block btn-danger" v-bind:disabled="!$validationSignIn.valid">登录</button>
+                  <p class="create-account-callout center-block">
+                    没有账号?
+                    <a v-link="{ path:'/session' }">注册新用户</a>
+                  </p>
+              </form>
+            </validator>
           </div>
         </div>
       </div>
@@ -181,7 +181,22 @@
 </style>
 <script>
   import { login, saveToken } from '../vuex/actions';
+  import { alert } from 'vue-strap';
+
   export default {
+    components: {
+      alert,
+    },
+    data() {
+      return {
+        user: {
+          username: '',
+          password: '',
+        },
+        signInError: false,
+        errormsg: '用户名或者密码错误，请重试',
+      };
+    },
     vuex: {
       actions: {
         login,
@@ -196,7 +211,7 @@
             this.saveToken(token);
             this.$route.router.go({ name: 'main' });
           }, (err) => {
-            console.log(err);
+            this.errmsg = err;
           });
       },
     },
