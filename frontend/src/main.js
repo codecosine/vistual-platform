@@ -1,60 +1,86 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
-import VueValidator from 'vue-validator';
-import AuthService from './api/AuthService';
+
+import 'bootstrap/dist/css/bootstrap.css';
 
 import App from './App';
-import Welcome from './components/Welcome.vue';
-import Gallery from './components/Gallery.vue';
-import Application from './components/Application.vue';
-import Exhibition from './components/Exhibition.vue';
-import Editor from './components/Editor.vue';
-import SignIn from './components/SignIn.vue';
+import Welcome from './components/Welcome';
+import Application from './components/Application';
+import Session from './components/Session';
 
-import 'bootstrap/less/bootstrap.less';
-Vue.use(VueResource);
+import Exhibition from './components/views/Exhibition';
+import Gallery from './components/views/Gallery';
+import Create from './components/views/Create';
+import Setting from './components/views/Setting';
+
+import store from './vuex/store';
+
 Vue.use(VueRouter);
-Vue.use(VueValidator);
+Vue.use(VueResource);
 
-const router = new VueRouter();
-router.map({
-  '/index': {
-    name: 'index',
-    component: Welcome,
-  },
-  '/session': {
-    name: 'login',
-    component: SignIn,
-  },
-  '/app': {
-    name: 'main',
+const routes = [
+  { path: '/', component: Welcome },
+  { path: '/session/:method', name: 'session', component: Session },
+  { path: '/app',
     component: Application,
-    auth: true,
-    subRoutes: {
-      '/': {
+    children: [
+      {
+        path: '',
+        name: 'main',
+        meta: { requiresAuth: true },
         component: Gallery,
       },
-      'exhibition/:appId': {
+      {
+        path: 'gallery',
+        meta: { requiresAuth: true },
+        component: Gallery,
+      },
+      {
         name: 'exhibition',
+        path: 'exhibition/:graphName',
+        meta: { requiresAuth: true },
         component: Exhibition,
       },
-      'editor/:appId': {
-        name: 'editor',
-        component: Editor,
+      {
+        path: 'setting',
+        meta: { requiresAuth: true },
+        component: Setting,
       },
-    },
+      {
+        name: 'create',
+        path: 'create',
+        meta: { requiresAuth: true },
+        component: Create,
+      },
+    ],
   },
+];
+const router = new VueRouter({
+  routes,
 });
-
-router.beforeEach(({ to }) => {
-  if (to.auth) {
-    // 在权限跳转前，尝试使用vuex中的token进行验证
-    return AuthService.isLoggedIn(to.router.app.$store.state.auth.token);
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const auth = store.getters.token;
+    // test warning~
+    // console.log(store);
+    // const auth = true;
+    if (!auth) {
+      next({
+        path: '/session/signIn',
+        query: { redirect: to.fullPath },
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
   }
-  return true;
 });
-router.redirect({
-  '*': '/index',
+/* eslint-disable no-new */
+new Vue({
+  router,
+  el: '#app',
+  template: '<App/>',
+  components: { App },
 });
-router.start(App, 'app');

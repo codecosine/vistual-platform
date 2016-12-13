@@ -7,6 +7,10 @@ module.exports = {
   },
   database: {
     local: 'mongodb://localhost/cosiner',
-    mLab: '' // if you want to use mLab for example
+  },
+  bak: {
+      'database': 'recommend',
+      'host':'202.116.148.193',
+      'port':'27017'
   }
 };

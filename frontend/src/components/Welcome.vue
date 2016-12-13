@@ -1,62 +1,51 @@
 <template>
-  <header class="site-header">
-    <div class="container">
-      <div class="navbar-header">
-        <img src='../assets/img/logo_simple.png' style="float:left;width:40px">
-        <a class="navbar-brand" href="#">可视化教学平台</a>
-      </div>
-      <nav class="navbar-main">
-        <ul class="nav navbar-nav">
-          <li><a href="#">特性</a></li>
-          <li><a href="#">文档</a></li>
-          <li><a href="#">帮助</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" v-link="{ path: '/session' }">登录</a></li>
-          <li><a href="#" v-link="{ path: '/session' }">注册</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <div class="site-main">
-    <div class="banner banner-inverse">
+  <div>
+    <header class="site-header">
       <div class="container">
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="center-block banner-text">
-              <h1>用心,听见更多</h1>
-              <h3>不再是满屏幕冰冷的数字</h3>
-              <h3>数据的声音,离你只有一个按钮的距离</h3>
-              <h3>可视化教学平台,所有人都可以快速上手</h3>
+        <div class="navbar-header">
+          <a href="#"><img src='../assets/img/logo_simple.png' style="float:left;width:32px"></a>
+        </div>
+        <nav class="navbar-main">
+          <a class="nav-item" href="#">可视化教学平台</a>
+        </nav>
+        <div class="nav-action">
+          <button class="btn btn-danger nav-btn" @click="changetoLogin('signIn')">登录</button>
+          <button class="btn btn-default nav-btn" @click="changetoLogin('signUp')">注册</button>
+        </div>
+      </div>
+    </header>
+    <div class="site-main">
+      <div class="banner banner-inverse">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-7">
+              <div class="center-block banner-text">
+                <h1>用你的数据</h1>
+                <h1>去看见更多,发现更多</h1>
+                <h3>将冰冷的数字化作图形</h3>
+                <h3>去细心倾听,数据的声音</h3>
+                <h3>可视化教学平台,离你只有一个按钮的距离</h3>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <validator name="validationSignIn">
-              <alert :show.sync="signInError" class="center-block" duration="0" type="danger" width="350px" dismissable>
-                <span class="glyphicon glyphicon-info-sign"></span>
-                <strong>{{ errormsg }}</strong>
-              </alert>
+            <div class="col-sm-5">
               <form role="form" class="center-block auth-modal auth-modal-inner">
-                  <div class="form-group">
-                    <label for="username">用户名/邮箱</label>
-                    <input id="username" type="text" v-model="user.username" v-validate:username="['required']" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="password">密码</label>
-                    <input id="password" type="password" v-model="user.password" v-validate:password="['required']" class="form-control" >
-                  </div>
-                  <button type="submit" @click="signIn" class="btn btn-block btn-danger" v-bind:disabled="!$validationSignIn.valid">登录</button>
-                  <p class="create-account-callout center-block">
-                    没有账号?
-                    <a v-link="{ path:'/session' }">注册新用户</a>
-                  </p>
+                <div class="form-group">
+                  <label for="Rusername">用户名/邮箱</label>
+                  <input id="Rusername" type="text" placeholder="输入你的用户名/邮箱" v-model="registerUser.username" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="Rpassword">密码</label>
+                  <input type="password" class="form-control" placeholder="创建你的密码" v-model="registerUser.password" id="Rpassword">
+                 </div>
+                 <div class="form-group action-group">
+                   <button type="submit" @click="signUp" class="btn btn-block btn-danger">注册并登录</button>
+                 </div>
               </form>
-            </validator>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
     <div class="container">
       <div class="row">
         <div class="col-sm-4">
@@ -77,53 +66,18 @@
           <p>可视化教学平台 提供了多种数据源支持，包括主流的Excel文件,Mysql数据库</p>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <h3 class="front_title text-center">更丰富的图表类型</h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3 col-xs-12">
-          <div class="step_item">
-            <p class="step_img">
-              <img src="../assets/img/gallery/pie-nest.png">
-            </p>
-          </div>
-        </div>
-        <div class="col-sm-3 col-xs-12">
-          <div class="step_item">
-            <p class="step_img">
-              <img src="../assets/img/gallery/scatter-punchCard.png">
-            </p>
-          </div>
-        </div>
-        <div class="col-sm-3 col-xs-12">
-          <div class="step_item">
-
-            <p class="step_img">
-              <img src="../assets/img/gallery/mix-timeline-finance.png">
-            </p>
-          </div>
-        </div>
-        <div class="col-sm-3 col-xs-12">
-          <div class="step_item">
-            <p class="step_img">
-              <img src="../assets/img/gallery/scatter-weight.png">
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
+    <footer class="footer">
+      <div class="container">
+        <p><a href="https://github.com/codecosine/vistual-platform">github</a></p>
+        <p>2015年“数字校园”学生科技项目</p>
+        <p>网络信息与现代教育技术中心</p>
+        <p>广东工业大学</p>
+      </div>
+    </footer>
   </div>
-  <footer class="footer">
-    <div class="container">
-      <p>Code licensed under <a href="https://github.com/angular-ui/bootstrap/blob/master/LICENSE">MIT License</a>.</p>
-      <p>广东工业大学数字校园</p>
-    </div>
-  </footer>
-
 </template>
-<style scoped>
+<style>
   .site-header{
     position: relative;
     z-index: 3;
@@ -135,23 +89,38 @@
     border-bottom: 1px solid rgba(0,0,0,0.075);
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
   }
-
   .navbar-main {
+    float: left;
     margin-bottom: 0;
     margin-left: 5px;
   }
-  .navbar-header a{
+  .nav-item {
+    position: relative;
+    float: left;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 16px;
+    border-top: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
     line-height: 20px;
     color: #3c4146;
   }
-  .navbar-main ul li a{
-    line-height: 20px;
-    color: #3c4146;
+  .nav-item:hover {
+    color: #000;
+    text-decoration: none;
+  }
+  .nav-actcion{
+    position: relative;
+  }
+  .nav-btn{
+    float: right;
+    margin-right: 8px;
   }
   .banner{
     background-image: url(../assets/img/pexels-photo.jpg);
     background-size: cover;
-    height: 550px;
+    height: 544px;
     margin-bottom: 50px;
     padding: 100px 0px;
   }
@@ -160,15 +129,13 @@
   }
   .banner::before {
     position: absolute;
+    height: 620px;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    display: block;
     content: "";
     background-color: rgba(0,0,0,0.3);
-    -webkit-transition: background-color 0.2s ease-out;
-    transition: background-color 0.2s ease-out;
   }
   .footer{
     padding-top: 40px;
@@ -177,42 +144,53 @@
     color: #767676;
     text-align: center;
   }
-
 </style>
 <script>
-  import { login, saveToken } from '../vuex/actions';
-  import { alert } from 'vue-strap';
-
   export default {
-    components: {
-      alert,
-    },
     data() {
       return {
-        user: {
+        registerUser: {
           username: '',
           password: '',
         },
-        signInError: false,
-        errormsg: '用户名或者密码错误，请重试',
       };
     },
-    vuex: {
-      actions: {
-        login,
-        saveToken,
-      },
+    created() {
+      this.authToken();// 组件创建完后检查本地localStorage
     },
     methods: {
-      signIn() {
-        this.login(this.user)
-          .then((res) => {
-            const token = res.data.token;
-            this.saveToken(token);
-            this.$route.router.go({ name: 'main' });
-          }, (err) => {
-            this.errmsg = err;
-          });
+      /* eslint no-undef: "error" */
+      /* eslint-env browser */
+      changetoLogin(method) {
+        this.$router.push({ name: 'session', params: { method } });
+      },
+      signUp() {
+        this.$store.dispatch('signUpRequest', this.registerUser)
+        .then((res) => {
+          if (res.success) {
+            this.$store.dispatch('signInSuccess', res.data);
+            window.localStorage.setItem('TOKEN_KEY', JSON.stringify(res.data.data.token));
+            this.$router.push({ name: 'main' });
+          }
+        }, (err) => {
+          this.$store.dispatch('signInError', err);
+        });
+      },
+      authToken() {
+        const localStorage = window.localStorage.getItem('TOKEN_KEY');
+        if (localStorage) {
+          this.$http.post('/users/token', { token: localStorage })
+            .then((res) => {
+              if (res.success) {
+                this.$store.dispatch('signInSuccess', res.data);
+                this.$router.push({ name: 'main' });
+              } else {
+                // 分发res.message
+              }
+            }, (err) => {
+              this.error = err.toString();
+            });
+        }
       },
     },
   };
