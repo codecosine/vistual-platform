@@ -1,7 +1,7 @@
 # vistual-platform
 
 可视化图表 -- 数字校园
-@ version 0.2.0
+@ version 1.0.0 beta
 
 backend:
 	mongo+mongoose+passport-jwt+express
