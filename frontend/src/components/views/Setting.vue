@@ -35,19 +35,24 @@
               <li>大小：{{file.size | formatSize}}</li>
             </ul>
           </div>
-
         </form>
       </div>
-      <h4 id="overview" class="page-header">当前已经导入的数据</h4>
-      <div class="col-sm-6">
-          <ul class="algorithm-select-list clearfix">
-            <li v-for="item in algorithmList">
-              <a class="algorithm-select-item" v-on:click="select(item)"
-                 v-bind:class="{ 'algorithm-selected': item.isSelected }" >
-                {{item.name}}
-              </a>
-            </li>
-          </ul>
+      <h4 id="overview" class="page-header">数据</h4>
+      <div class="col-lg-12">
+        <table class="table table-list">
+          <thead class="thead-default">
+          <tr>
+            <th v-for="item in nameList">{{item}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="item in rawData.slice(0,6)">
+            <td v-for="value in nameList">
+              <span>{{ item[value] }}</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -91,41 +96,6 @@
           /* 提交任务表单 */
           addTaskSuccess: false,
           addTaskFail: false,
-          algorithm: 'IRE',
-          remark: '',
-          /* 算法参数 */
-          algorithmList: [
-            {
-              name: 'IRE',
-              args: '',
-              isSelected: true,
-            },
-            {
-              name: 'CRE',
-              args: '',
-              isSelected: false,
-            },
-            {
-              name: 'ICRE',
-              args: '',
-              isSelected: false,
-            },
-            {
-              name: 'IIRE',
-              args: '',
-              isSelected: false,
-            },
-            {
-              name: 'IRE3',
-              args: '',
-              isSelected: false,
-            },
-            {
-              name: 'CRE3',
-              args: '',
-              isSelected: false,
-            },
-          ],
           select(item) {
             this.algorithm = item.name;
             this.algorithmList.forEach((ele) => {
@@ -144,16 +114,28 @@
               file.headers['X-Filename'] = encodeURIComponent(file.name);
               file.data.finename = file.name;
             },
-            after(file) {
-              console.warn('after');
-              console.warn(file);
-            },
           },
         };
       },
       computed: {
+        rawData() {
+          if (this.files.length) {
+            return this.files[0].response.calculation;
+          }
+          return [0];
+        },
+        nameList() {
+          if (this.files.length) {
+            const foo = this.rawData[0];
+            return Object.keys(foo);
+          }
+          return ['当前没有导入数据'];
+        },
         fileName() {
-          return this.files[0].response.fileName;
+          if (this.files.length) {
+            return this.files[0].response.fileName;
+          }
+          return [0];
         },
         valid() {
           const valid = {
@@ -173,6 +155,10 @@
         },
       },
       methods: {
+        comfirm() {
+          this.$tore.dispatch('updateRaw', this.rawData);
+          this.$tore.dispatch('updateSeriesName', this.nameList);
+        },
         addTask() {
           this.$http.post('/calculation/cal',
             {
@@ -214,43 +200,5 @@
     text-align: left;
     font-weight: bold;
   }
-  dl dd{
-    width: 350px;
-    float: left;
-  }
-  .algorithm-select-list{
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
-  }
-  .algorithm-select-list li{
-    float: left;
-    position: relative;
-    margin: 0 4px 4px 0;
-    line-height: 28px;
-    vertical-align: middle;
-    padding: 2px;
-    cursor: pointer;
-  }
-  .algorithm-select-list li a:hover{
-    border: 1px solid #bd2013;
-  }
-  .algorithm-select-list li a {
-    float: left;
-    background-color: #fff;
-    white-space: nowrap;
-    width: auto!important;
-    min-width: 10px;
-    padding: 0 9px;
-    text-align: center;
-    border: 1px solid #b8b7bd;
-    text-decoration: none;
-  }
-  .algorithm-select-list li .algorithm-selected{
-    border: 1px solid #bd2013;
-  }
-  label {
-    display: inline-block;
-    margin-bottom: 0;
-  }
+
 </style>

@@ -4,6 +4,14 @@
       <div>
         <h3 id="overview" class="page-header">打开一个图表</h3>
         <div class="row">
+          <div class="col-xs-6 col-md-3">
+            <a @click="showCharts('bar')" class="thumbnail galleryList">
+              <img src="../../assets/img/gallery/bar-mark.png" data-holder-rendered="true" >
+            </a>
+            <div class="chartName">
+              <h5 class="text-center">名称:未命名图表</h5>
+            </div>
+          </div>
           <div class="col-xs-6 col-md-3" v-for="item in chartsItems">
             <a @click="showCharts(item.name)" class="thumbnail galleryList">
               <img alt="item.name" v-bind:src="item.src" data-holder-rendered="true" >
@@ -19,7 +27,9 @@
             <a @click="create(item.name)" class="thumbnail galleryList">
               <img alt="item.name" v-bind:src="item.src" data-holder-rendered="true" >
             </a>
-            <span class="text-center">{{item.name}}</span>
+            <div class="chartName">
+              <h5 class="text-center">图表类型:{{item.name}}</h5>
+            </div>
           </div>
         </div>
       </div>
@@ -41,10 +51,13 @@
   .app-main {
     margin-top: 40px;
   }
-  .galleryList{
+  .galleryList {
     height: 180px;
     width: 100%;
     display: block;
+  }
+  .chartName h5{
+    font-weight: bold;
   }
 
 </style>

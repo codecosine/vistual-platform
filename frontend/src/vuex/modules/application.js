@@ -1,15 +1,15 @@
 /**
  * Created by cosine on 2016/9/9.
  */
-import Vue from 'vue';
 import {
   UPDATE_CHART_ITEMS,
   CREATE_CHART,
   DELETE_CHART,
   UPDATE_CHART_ID,
-  UPDATE_SERIES,
+  UPDATE_SERIES_NAME,
   UPDATE_CURRENT_NAME,
-  UPDATE_CHART_XAXIS,
+  UPDATE_RAW_DATA,
+  UPDATE_OPTION,
 } from '../mutation-types';
 
 const appState = {
@@ -182,8 +182,44 @@ const appState = {
         },
       ],
     },
+    scatter: {
+      title: {
+        text: '散点图',
+      },
+      toolbox: {
+        feature: {
+          dataZoom: {},
+          brush: {
+            type: ['rect', 'polygon', 'clear'],
+          },
+        },
+      },
+      legend: {
+        data: [],
+        left: 'center',
+      },
+      xAxis: [
+        {
+          type: 'value',
+          scale: true,
+          splitLine: {
+            show: false,
+          },
+        },
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          scale: true,
+          splitLine: {
+            show: false,
+          },
+        },
+      ],
+      series: [],
+    },
   },
-  graphOptions: {
+  graphOption: {
     title: {
       text: '当前没有图表数据渲染',
     },
@@ -200,18 +236,8 @@ const appState = {
     ],
     series: [],
   },
-  dataSeries: {
-    dataName1: {
-      type: 'default',
-      dimension: 1,
-      data: [1, 2, 3, 4, 5, 6, 6],
-    },
-    dataName2: {
-      type: 'default',
-      dimension: 1,
-      data: ['男生'],
-    },
-  },
+  dataSeries: [],
+  rawData: [],
 };
 /* eslint no-param-reassign: ["error", { "props": false }] */
 const mutations = {
@@ -230,37 +256,53 @@ const mutations = {
   [UPDATE_CURRENT_NAME](state, data) {
     state.currentName = data;
   },
-  [UPDATE_SERIES](state, data) {
+  [UPDATE_SERIES_NAME](state, data) {
     state.dataSeries = data;
   },
-  [UPDATE_CHART_XAXIS](state, data) {
-    state.createFrom.xAxis.push(data);
+  [UPDATE_RAW_DATA](state, data) {
+    state.rawData = data;
+  },
+  [UPDATE_OPTION](state, data) {
+    state.graphOption = data;
   },
 };
 const actions = {
   fetchItemsSuccess({ state, commit }, data) {
     commit(UPDATE_CHART_ITEMS, data);
   },
-  dataSeriesRequest({ state, commit }, user) {
-    if (state.request) {
-      return new Error('请求重复发送');
+  updateSeriesName({ state, commit }, namelist) {
+    commit(UPDATE_SERIES_NAME, namelist);
+  },
+  updateRaw({ state, commit }, data) {
+    commit(UPDATE_RAW_DATA, data);
+  },
+  machiningRaw({ state, commit }, nameList) {
+    if (!state.rawData.length) {
+      const result = state.rawData.map((ele) => {
+        const array = [];
+        nameList.forEach((value) => {
+          if (!array[value]) {
+            array.push(ele[value]);
+          }
+        });
+        return array;
+      });
+      return result;
     }
-    return Vue.http.post('/users/auth', user);
+    return [];
   },
-  addXAxis({ state, commit }, dataSerie) {
-    commit(UPDATE_CHART_XAXIS, dataSerie);
-  },
-  updateName({ state, commit }, name) {
-    commit(UPDATE_CURRENT_NAME, name);
+  updateOption({ state, commit }, data) {
+    commit(UPDATE_OPTION, data);
   },
 };
 const appGetters = {
   currentId: state => state.currentId,
   chartsItems: state => state.chartItems,
   dataSeries: state => state.dataSeries,
-  option: state => state.graphOptions,
+  option: state => state.graphOption,
   examples: state => state.examples,
   createChartType: state => state.createFrom.chartType,
+  rawData: state => state.rawData,
 };
 
 export default {

@@ -57,8 +57,8 @@
         </div>
         <div class="col-sm-4">
           <img src="../assets/img/introduce/handsontable.png" alt="handsontable" class="img-responsive">
-          <h3>Excel快速编辑</h3>
-          <p>通过数据源导入的数据可以迅速,便捷的进行处理,更直观,所有人都可以快速上手</p>
+          <h3>Excel快速导入</h3>
+          <p>通过EXCEL文件导入的数据可以迅速,便捷的进行处理,更直观。</p>
         </div>
         <div class="col-sm-4">
           <img src="../assets/img/introduce/db.png" alt="Components" class="img-responsive">
