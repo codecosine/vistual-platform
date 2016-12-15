@@ -227,7 +227,7 @@ function machiningRaw(raw, seriesArg) {
 }
 
 function getOption(createArgs, rawData) {
-  const option = examples[createArgs.chartType];
+  const option = examples[createArgs.seriesArg.type];
   // 添加标题
   option.title.text = createArgs.chartName;
   // 添加legend 小组

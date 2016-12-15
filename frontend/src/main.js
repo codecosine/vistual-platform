@@ -14,7 +14,7 @@ import Gallery from './components/views/Gallery';
 import Create from './components/views/Create';
 import Setting from './components/views/Setting';
 
-// import store from './vuex/store';
+import store from './vuex/store';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -61,14 +61,13 @@ const router = new VueRouter({
 });
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    // const auth = store.getters.token;
+    const auth = store.getters.token;
     // test warning~
     // console.log(store);
-    const auth = true;
+    // const auth = true;
     if (!auth) {
       next({
-        path: '/session/signIn',
-        query: { redirect: to.fullPath },
+        path: '/app',
       });
     } else {
       next();

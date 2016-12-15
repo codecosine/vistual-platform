@@ -71,7 +71,7 @@
             src: require('../../assets/img/gallery/bar-mark.png'), // eslint-disable-line
           },
           {
-            name: 'bar-stack',
+            name: 'scatter',
             src: require('../../assets/img/gallery/bar-stack.png'), // eslint-disable-line
           },
           {
@@ -98,7 +98,7 @@
     },
     methods: {
       create(graphName) {
-        this.$store.dispatch('updateName', graphName);
+        this.$store.dispatch('updateChartName', graphName);
         this.$router.push({ name: 'create' });
       },
       showCharts(graphName) {
@@ -106,7 +106,7 @@
       },
       fetchItems(username) {
         this.loading = true;
-        this.$http.post('/users/chartItems', { username })
+        this.$http.post('/api/list', { username, token: this.$store.getters.token })
           .then((res) => {
             // token获得已经登录数据
             this.$store.dispatch('fetchItemsSuccess', res.data);

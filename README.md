@@ -1,7 +1,8 @@
 # vistual-platform
 
 可视化图表 -- 数字校园
-@ version 1.0.0 beta
+@ version 1.0.0 beta@2
+内存溢出问题依然存在。待解决
 
 backend:
 	mongo+mongoose+passport-jwt+express

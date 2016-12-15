@@ -49,13 +49,6 @@
           </ul>
         </div>
         <div class="form-group">
-          <div class="alert alert-info" role="alert">
-            <span>当前选择的数据列顺序为:[<span>
-            <span v-for="item in SeriesList">{{item}},</span>
-            <span>]</span>
-          </div>
-        </div>
-        <div class="form-group">
           <button type="submit" class="btn btn-primary" @click="confirm">生成图表</button>
         </div>
       </form>

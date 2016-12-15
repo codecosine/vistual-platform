@@ -168,8 +168,12 @@
         this.$store.dispatch('signUpRequest', this.registerUser)
         .then((res) => {
           if (res.success) {
-            this.$store.dispatch('signInSuccess', res.data);
-            window.localStorage.setItem('TOKEN_KEY', JSON.stringify(res.data.data.token));
+            const auth = {
+              username: res.data.username,
+              token: res.data.token,
+            };
+            this.$store.dispatch('signInSuccess', auth);
+            window.localStorage.setItem('TOKEN_KEY', res.data.token);
             this.$router.push({ name: 'main' });
           }
         }, (err) => {
@@ -177,12 +181,17 @@
         });
       },
       authToken() {
-        const localStorage = window.localStorage.getItem('TOKEN_KEY');
-        if (localStorage) {
-          this.$http.post('/users/token', { token: localStorage })
+        const TokenlocalStorage = window.localStorage.getItem('TOKEN_KEY');
+        if (TokenlocalStorage) {
+          this.$http.post('/token', { token: TokenlocalStorage })
             .then((res) => {
-              if (res.success) {
-                this.$store.dispatch('signInSuccess', res.data);
+              if (res.data.success) {
+                const auth = {
+                  username: res.data.username,
+                  token: TokenlocalStorage,
+                };
+                this.$http.headers.common['x-access-token'] = TokenlocalStorage;
+                this.$store.dispatch('signInSuccess', auth);
                 this.$router.push({ name: 'main' });
               } else {
                 // 分发res.message

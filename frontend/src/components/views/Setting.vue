@@ -3,7 +3,6 @@
     <div class="container">
       <h3 id="overview" class="page-header">导入excel文件数据</h3>
       <div class="row">
-        <form role="form">
           <div class="form-group col-sm-7">
             <label for="exampleInputEmail1">上传excel文件</label>
             <div class="input-group">
@@ -13,7 +12,8 @@
                   class="btn btn-default file-upload"
                   :events="events"
                   name="xls"
-                  post-action="/upload/xls"
+                  :headers= "headers"
+                  post-action="/api/calculation"
                   extensions="xls,xlsx"
                   :files="files"
                   ref="upload">
@@ -35,9 +35,11 @@
               <li>大小：{{file.size | formatSize}}</li>
             </ul>
           </div>
-        </form>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" @click="comfirm">确认配置</button>
+          </div>
       </div>
-      <h4 id="overview" class="page-header">数据</h4>
+      <h4 id="overview" class="page-header">已导入的数据（只显示前6条）</h4>
       <div class="col-lg-12">
         <table class="table table-list">
           <thead class="thead-default">
@@ -93,6 +95,8 @@
       },
       data() {
         return {
+          rawData: [],
+          nameList: [],
           /* 提交任务表单 */
           addTaskSuccess: false,
           addTaskFail: false,
@@ -106,6 +110,9 @@
           /*
             上传插件配置
            */
+          headers: {
+            'x-access-token': this.$store.getters.token,
+          },
           files: [],
           upload: [],
           events: {
@@ -120,20 +127,18 @@
       computed: {
         rawData() {
           if (this.files.length) {
-            return this.files[0].response.calculation;
+            if (this.files[0].response.success) {
+              return this.files[0].response.calculation;
+            }
           }
           return [0];
         },
         nameList() {
           if (this.files.length) {
-            const foo = this.rawData[0];
-            return Object.keys(foo);
-          }
-          return ['当前没有导入数据'];
-        },
-        fileName() {
-          if (this.files.length) {
-            return this.files[0].response.fileName;
+            if (this.files[0].response.success) {
+              const obj = this.files[0].response.calculation[0];
+              return Object.keys(obj);
+            }
           }
           return [0];
         },
@@ -156,11 +161,11 @@
       },
       methods: {
         comfirm() {
-          this.$tore.dispatch('updateRaw', this.rawData);
-          this.$tore.dispatch('updateSeriesName', this.nameList);
+          this.$store.dispatch('updateRaw', this.rawData);
+          this.$store.dispatch('updateSeriesName', this.nameList);
         },
         addTask() {
-          this.$http.post('/calculation/cal',
+          this.$http.post('/api/calculation',
             {
               fileName: this.fileName,
               algoName: this.algorithm,

@@ -3,7 +3,7 @@
  */
 module.exports = {
   auth: {
-    secret: 'no the communist party no new china.'
+    secret: 'cosine is a handsome'
   },
   database: {
     local: 'mongodb://localhost/cosiner',

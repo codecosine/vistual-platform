@@ -95,9 +95,12 @@
           this.$store.dispatch('signInRequest', this.user)
             .then((res) => {
               if (res.data.success) {
-                this.$store.dispatch('signInSuccess', res.data.data);
-                // localStorage 中保存一份
-                window.localStorage.setItem('TOKEN_KEY', JSON.stringify(res.data.data.token));
+                const auth = {
+                  username: res.data.username,
+                  token: res.data.token,
+                };
+                this.$store.dispatch('signInSuccess', auth);
+                window.localStorage.setItem('TOKEN_KEY', res.data.token);
                 this.$router.push({ name: 'main' });
               }  // 传递 res.message
             }, (err) => {
@@ -108,10 +111,14 @@
           this.$store.dispatch('signUpRequest', this.registerUser)
           .then((res) => {
             if (res.success) {
-              this.$store.dispatch('signInSuccess', res.data);
-              // this.$route.router.go({ name: 'main' });
+              const auth = {
+                username: res.data.username,
+                token: res.data.token,
+              };
+              this.$store.dispatch('signInSuccess', auth);
+              window.localStorage.setItem('TOKEN_KEY', res.data.token);
+              this.$router.push({ name: 'main' });
             }
-            // 传递 res.message
           }, (err) => {
             this.$store.dispatch('signInError', err);
           });

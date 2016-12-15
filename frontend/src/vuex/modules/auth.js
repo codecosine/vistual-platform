@@ -10,7 +10,7 @@ const authState = {
   token: null,
   request: false,
   user: {
-    username: 'gduttest',
+    username: '未登录',
   },
 };
 /* eslint no-param-reassign: ["error", { "props": false }] */
@@ -39,14 +39,14 @@ const actions = {
       return new Error('请求重复发送');
     }
     commit(SIGNIN_REQUEST);
-    return Vue.http.post('/users/auth', user);
+    return Vue.http.post('/auth', user);
   },
   signUpRequest({ state, commit }, user) {
     if (state.request) {
       return new Error('请求重复发送');
     }
     commit(SIGNIN_REQUEST);
-    return Vue.http.post('/users/register', user);
+    return Vue.http.post('/register', user);
   },
   signInError({ commit }) {
     commit(SIGNIN_REQUEST_FINISH);
