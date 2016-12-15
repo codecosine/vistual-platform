@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <v-echarts :options="test.bar" width="1000px"></v-echarts>
-    <v-echarts :options="test.line" width="1000px"></v-echarts>
   </div>
 </template>
 <style scoped>

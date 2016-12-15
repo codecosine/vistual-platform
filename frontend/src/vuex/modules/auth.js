@@ -10,7 +10,7 @@ const authState = {
   token: null,
   request: false,
   user: {
-    username: '未登录',
+    username: 'gduttest',
   },
 };
 /* eslint no-param-reassign: ["error", { "props": false }] */

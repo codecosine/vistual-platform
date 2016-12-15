@@ -11,6 +11,7 @@ import {
   UPDATE_RAW_DATA,
   UPDATE_OPTION,
 } from '../mutation-types';
+import chartBusiness from '../chartBusiness';
 
 const appState = {
   chartItems: [{
@@ -236,7 +237,7 @@ const appState = {
     ],
     series: [],
   },
-  dataSeries: [],
+  dataSeries: ['当前没有导入数据', '僵硬的测试', 'test2'],
   rawData: [],
 };
 /* eslint no-param-reassign: ["error", { "props": false }] */
@@ -294,6 +295,10 @@ const actions = {
   updateOption({ state, commit }, data) {
     commit(UPDATE_OPTION, data);
   },
+  comfirmCreate({ state, commit }, setting) {
+    const option = chartBusiness.getOption(setting, state.rawData);
+    commit(UPDATE_OPTION, option);
+  },
 };
 const appGetters = {
   currentId: state => state.currentId,
@@ -301,7 +306,7 @@ const appGetters = {
   dataSeries: state => state.dataSeries,
   option: state => state.graphOption,
   examples: state => state.examples,
-  createChartType: state => state.createFrom.chartType,
+  chartType: state => state.createFrom.chartType,
   rawData: state => state.rawData,
 };
 
