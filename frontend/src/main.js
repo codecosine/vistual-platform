@@ -18,6 +18,7 @@ import store from './vuex/store';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
+Vue.config.devtools = true;
 
 const routes = [
   { path: '/', component: Welcome },
@@ -38,7 +39,7 @@ const routes = [
       },
       {
         name: 'exhibition',
-        path: 'exhibition/:graphName',
+        path: 'exhibition',
         meta: { requiresAuth: true },
         component: Exhibition,
       },
@@ -63,12 +64,13 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     const auth = store.getters.token;
     // test warning~
-    // console.log(store);
     // const auth = true;
     if (!auth) {
       next({
         path: '/app',
       });
+      // 分发信息
+      store.dispatch('tokenAuthFalse');
     } else {
       next();
     }

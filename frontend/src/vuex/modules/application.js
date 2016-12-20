@@ -35,7 +35,7 @@ const appState = {
     ],
     series: [],
   },
-  dataSeries: ['当前没有导入数据', '僵硬的测试', 'test2'],
+  dataSeries: ['当前没有导入数据'],
   rawData: [],
 };
 /* eslint no-param-reassign: ["error", { "props": false }] */

@@ -11,7 +11,7 @@
               <label for="password">密码</label>
               <input id="password" type="password" v-model="user.password" class="form-control" >
             </div>
-            <button type="submit" @click="signIn" class="btn btn-block btn-danger">登录</button>
+            <button type="button" @click="signIn" class="btn btn-block btn-danger">登录</button>
         </form>
         <form role="form" class="center-block auth-modal auth-modal-inner" v-else>
           <div class="form-group">
@@ -22,7 +22,7 @@
           <label for="Rpassword">密码</label>
           <input type="password" class="form-control" v-model="registerUser.password" id="Rpassword">
            </div>
-          <button type="submit" @click="signUp" class="btn btn-block btn-danger">注册</button>
+          <button type="button" @click="signUp" class="btn btn-block btn-danger">注册</button>
         </form>
         <p class="create-account-callout center-block auth-modal" v-if="method==='signIn'">
             没有账号?<a class="hand" href="/#/session/signUp" data-ga-click="Sign in, switch to sign up">注册新用户</a>

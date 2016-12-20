@@ -35,9 +35,12 @@
               <li>大小：{{file.size | formatSize}}</li>
             </ul>
           </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary" @click="comfirm">确认配置</button>
-          </div>
+
+      </div>
+      <div class="col-lg-12">
+        <div class="form-group">
+          <a type="button" href="#/app/create" class="btn btn-primary" @click="comfirm">确认配置</a>
+        </div>
       </div>
       <h4 id="overview" class="page-header">已导入的数据（只显示前6条）</h4>
       <div class="col-lg-12">
@@ -163,6 +166,7 @@
         comfirm() {
           this.$store.dispatch('updateRaw', this.rawData);
           this.$store.dispatch('updateSeriesName', this.nameList);
+          this.$store.dispatch('updateInfoMsg', '数据配置成功，请继续操作');
         },
         addTask() {
           this.$http.post('/api/calculation',
