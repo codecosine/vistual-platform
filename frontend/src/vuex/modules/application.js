@@ -75,25 +75,14 @@ const actions = {
   updateChartName({ state, commit }, name) {
     commit(UPDATE_CHART_TYPE, name);
   },
-  machiningRaw({ state, commit }, nameList) {
-    if (!state.rawData.length) {
-      const result = state.rawData.map((ele) => {
-        const array = [];
-        nameList.forEach((value) => {
-          if (!array[value]) {
-            array.push(ele[value]);
-          }
-        });
-        return array;
-      });
-      return result;
-    }
-    return [];
-  },
   updateOption({ state, commit }, data) {
     commit(UPDATE_OPTION, data);
   },
-  comfirmCreate({ state, commit }, setting) {
+  comfirmCreate({ state, commit }, comfirm) {
+    const option = comfirm.getOption(comfirm.setting, state.rawData, chartBusiness.machiningRaw);
+    commit(UPDATE_OPTION, option);
+  },
+  comfirmCreatebak({ state, commit }, setting) {
     const option = chartBusiness.getOption(setting, state.rawData);
     commit(UPDATE_OPTION, option);
   },

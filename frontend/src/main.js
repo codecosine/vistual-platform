@@ -13,6 +13,8 @@ import Exhibition from './components/views/Exhibition';
 import Gallery from './components/views/Gallery';
 import Create from './components/views/Create';
 import Setting from './components/views/Setting';
+import Bar from './components/charts/Bar';
+import Scatter from './components/charts/Scatter';
 
 import store from './vuex/store';
 
@@ -54,6 +56,30 @@ const routes = [
         meta: { requiresAuth: true },
         component: Create,
       },
+      {
+        name: 'bar',
+        path: 'bar',
+        meta: { requiresAuth: true },
+        component: Bar,
+      },
+      {
+        name: 'scatter',
+        path: 'scatter',
+        meta: { requiresAuth: true },
+        component: Scatter,
+      },
+      {
+        name: 'line',
+        path: 'line',
+        meta: { requiresAuth: true },
+        component: Bar,
+      },
+      {
+        name: 'pie',
+        path: 'pie',
+        meta: { requiresAuth: true },
+        component: Bar,
+      },
     ],
   },
 ];
@@ -62,9 +88,9 @@ const router = new VueRouter({
 });
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    const auth = store.getters.token;
+    // const auth = store.getters.token;
     // test warning~
-    // const auth = true;
+    const auth = true;
     if (!auth) {
       next({
         path: '/app',

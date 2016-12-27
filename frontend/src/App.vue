@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="global-alert" v-show="usermsgshow">
-      <div class="alert alert-dismissible" role="alert"
+      <div class="alert alert-dismissible container" role="alert"
       v-bind:class="{
         'alert-warning': usermsg.msgstate === 'warning',
         'alert-success': usermsg.msgstate === 'success',

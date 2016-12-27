@@ -24,7 +24,7 @@
         <h3 id="overview" class="page-header">创建一个新的图表</h3>
         <div class="row">
           <div class="col-xs-6 col-md-3" v-for="item in gallery">
-            <a @click="create(item.name)" class="thumbnail galleryList">
+            <a v-bind:href="item.name" @click="create(item.name)" class="thumbnail galleryList">
               <img alt="item.name" v-bind:src="item.src" data-holder-rendered="true" >
             </a>
             <div class="chartName">
@@ -67,20 +67,24 @@
       return {
         gallery: [
           {
-            name: 'bar',
-            src: require('../../assets/img/gallery/bar-mark.png'), // eslint-disable-line
+            url: '/#/app/bar',
+            name: '柱状图',
+            src: require('../charts/settings/bar-setting.png'), // eslint-disable-line
           },
           {
-            name: 'scatter',
-            src: require('../../assets/img/gallery/bar-stack.png'), // eslint-disable-line
+            url: '/#/app/scatter',
+            name: '散点图',
+            src: require('../charts/settings/scatter-setting.png'), // eslint-disable-line
           },
           {
-            name: 'mix-line-bar',
-            src: require('../../assets/img/gallery/mix-line-bar.png'), // eslint-disable-line
+            url: '/#/app/pie',
+            name: '饼图',
+            src: require('../charts/settings/pie-setting.png'), // eslint-disable-line
           },
           {
-            name: 'pie-doughnut',
-            src: require('../../assets/img/gallery/pie-doughnut.png'), // eslint-disable-line
+            url: '/#/app/line',
+            name: '折线图',
+            src: require('../charts/settings/line-setting.png'), // eslint-disable-line
           },
         ],
       };
