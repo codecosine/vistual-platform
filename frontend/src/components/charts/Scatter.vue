@@ -89,7 +89,7 @@ export default {
           ],
           series: [],
         };
-        scatter.title = setting.title;
+        scatter.title.text = setting.title;
         if (setting.filterGroup) {
           scatter.legend.data = setting.sortNamesValues;
           scatter.series = setting.filterGroup.map((filter) => {
@@ -98,6 +98,7 @@ export default {
             obj.name = filter.name;
             obj.data = machiningRaw(raw, setting.seriesNames,
               (item => (item[filter.key] === filter.name)));
+            console.log(obj);
             return obj;
           });
         } else {
@@ -106,7 +107,8 @@ export default {
           obj.type = 'scatter';
           obj.name = '数据分类';
           obj.data = machiningRaw(raw, setting.seriesNames);
-          scatter.series = [].push(obj);
+          console.log(obj);
+          scatter.series.push(obj);
         }
         return scatter;
       },

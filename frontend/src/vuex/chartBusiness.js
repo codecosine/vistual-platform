@@ -12,6 +12,7 @@ function machiningRaw(raw, namelist, filter) {
     });
     result.push(array);
   });
+  console.log(result);
   return result;
 }
 export default {

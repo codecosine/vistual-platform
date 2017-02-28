@@ -24,7 +24,7 @@
         <h3 id="overview" class="page-header">创建一个新的图表</h3>
         <div class="row">
           <div class="col-xs-6 col-md-3" v-for="item in gallery">
-            <a v-bind:href="item.name" @click="create(item.name)" class="thumbnail galleryList">
+            <a v-bind:href="item.url" @click="create(item.name)" class="thumbnail galleryList">
               <img alt="item.name" v-bind:src="item.src" data-holder-rendered="true" >
             </a>
             <div class="chartName">

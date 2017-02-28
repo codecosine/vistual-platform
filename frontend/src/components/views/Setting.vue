@@ -39,7 +39,7 @@
       </div>
       <div class="col-lg-12">
         <div class="form-group">
-          <a type="button" href="#/app/create" class="btn btn-primary" @click="comfirm">确认配置</a>
+          <a type="button" class="btn btn-primary" @click="comfirm">确认配置</a>
         </div>
       </div>
       <h4 id="overview" class="page-header">已导入的数据（只显示前6条）</h4>
@@ -139,8 +139,7 @@
         nameList() {
           if (this.files.length) {
             if (this.files[0].response.success) {
-              const obj = this.files[0].response.calculation[0];
-              return Object.keys(obj);
+              return Object.keys(this.files[0].response.calculation[0]);
             }
           }
           return [0];
@@ -167,6 +166,7 @@
           this.$store.dispatch('updateRaw', this.rawData);
           this.$store.dispatch('updateSeriesName', this.nameList);
           this.$store.dispatch('updateInfoMsg', '数据配置成功，请继续操作');
+          this.$router.go(-1);
         },
         addTask() {
           this.$http.post('/api/calculation',

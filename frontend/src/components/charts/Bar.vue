@@ -78,7 +78,7 @@ export default {
           ],
           series: [],
         };
-        bar.title = setting.title;
+        bar.title.text = setting.title;
         bar.legend.data = setting.seriesNames;
         bar.xAxis.data = machiningRaw(raw, setting.xAxisNames)
                           .map(ele => ele[0]);
@@ -128,7 +128,7 @@ export default {
       const comfirmArg = {
         setting: {
           title: this.title,
-          xAxisNames: [].push(this.xAxisNames),
+          xAxisNames: [this.xAxisNames],
           seriesNames: this.seriesNames,
         },
         getOption: this.getOption,

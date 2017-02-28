@@ -17,10 +17,10 @@ exports.calculation = function(req, res){
       });
       return;
     }
+    var d = domain.create();
     // xlsx解析
     var filepath = files.xls.path;
     var workbook = xlsx.readFile(filepath);
-    console.log('workbook');
     var first_sheet_name = workbook.SheetNames[0];
     var worksheet = workbook.Sheets[first_sheet_name];
     var calculation = xlsx.utils.sheet_to_json(worksheet);
